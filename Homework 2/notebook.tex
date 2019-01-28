@@ -1,0 +1,855 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{homework02}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{REI602M Machine Learning - Homework
+2}\label{rei602m-machine-learning---homework-2}
+
+\subsubsection{Due: Sunday 27.1.2019}\label{due-sunday-27.1.2019}
+
+\textbf{Objectives}: Python programming and Numpy, Local regression and
+the Lasso, Locally weighted regression, Nearest neighbor regression,
+model assessment and model selection. Introduction to the scikit-learn
+package.
+
+\textbf{Name}: Emil Gauti Friðriksson, \textbf{email: } egf3@hi.is,
+\textbf{collaborators:} Alexander Guðjónsson
+
+Please provide your solutions by filling in the appropriate cells in
+this notebook, creating new cells as needed. Hand in your solution on
+Gradescope. Make sure that you are familiar with the course rules on
+collaboration (encouraged) and copying (very, very, bad).
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  {[}\(k\)-nearest neighbor regression, 25 points{]} In \(k\)-NN
+  regression the predicted value for point \(\hat{x}\) is obtained by
+  averaging over the \(y\)-values that correspond to the \(k\)
+  \(x\)-values that are closest to \(\hat{x}\) using \(d(a,b)=||a-b||\)
+  as a measure distance between points \(a\) and \(b\).
+\end{enumerate}
+
+Create a function which implements \(k\)-NN regression using NumPy
+functionality. Apply your function to the global warming data in
+\texttt{global.csv} (see below) to predict temperature fluctuations on a
+monthly basis between 1850 and 2015, using \(K=2\). Create a scatter
+plot of the original data points and overlay with the predicted values
+(using a different color).
+
+\emph{Comments}: The global warming data set contains global annual
+temperature measurements from 1850 to 2015 (on the Celcius scale). The
+values have been scaled so that they represent temperature anomalies
+relative to the 1961 - 1990 average. The data comes from
+https://cdiac.ess-dive.lbl.gov/trends/temp/jonescru/jones.html
+
+The following functions are useful: \texttt{numpy.linalg.norm},
+\texttt{numpy.mean} and \texttt{numpy.argsort}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}80}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k}{def} \PY{n+nf}{knn\PYZus{}reg\PYZus{}predict}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{xpred}\PY{p}{,} \PY{n}{K}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} k\PYZhy{}nearest neighbor regression}
+             \PY{c+c1}{\PYZsh{}    X ....... Input variables}
+             \PY{c+c1}{\PYZsh{}    y ....... Output variable}
+             \PY{c+c1}{\PYZsh{}    xpred ... Point to predict}
+             \PY{c+c1}{\PYZsh{}    K ....... Number of neighbors (positive integer)}
+             \PY{c+c1}{\PYZsh{} Return value}
+             \PY{c+c1}{\PYZsh{}    ypre .... Predicted value at xpred}
+             \PY{k}{assert}\PY{p}{(}\PY{n}{K}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n+nb}{int}\PY{p}{(}\PY{n}{K}\PY{p}{)}\PY{o}{==}\PY{n}{K}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}index = X.index(xpred)}
+             \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{n}{xpred} \PY{o}{=} \PY{p}{(}\PY{n}{xpred}\PY{o}{\PYZhy{}}\PY{n+nb}{min}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n+nb}{min}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}Skölum xpred á [0,1] líkt og X}
+             \PY{n}{X} \PY{o}{=} \PY{p}{(}\PY{n}{X}\PY{o}{\PYZhy{}}\PY{n+nb}{min}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n+nb}{min}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}Skölum X gögnin á [0,1]}
+             \PY{n}{dist} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+             
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{dist}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{xpred}\PY{p}{)}
+             \PY{n}{ysort} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{dist}\PY{p}{)}\PY{p}{]}
+             \PY{n}{ypred} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{ysort}\PY{p}{[}\PY{p}{:}\PY{n}{K}\PY{p}{]}\PY{p}{)}
+             \PY{k}{return} \PY{n}{ypred}
+         
+         \PY{n}{X}\PY{p}{,}\PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{loadtxt}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{global.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{unpack}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}\PY{n}{skiprows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{K}\PY{o}{=}\PY{l+m+mi}{2}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+         \PY{n}{xpred} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{min}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{12}\PY{p}{)}
+         \PY{n}{m} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{xpred}\PY{p}{)}
+         \PY{n}{ypred} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{m}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{m}\PY{p}{)}\PY{p}{:}
+             \PY{n}{ypred}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{knn\PYZus{}reg\PYZus{}predict}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n}{xpred}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{n}{K}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{xpred}\PY{p}{,}\PY{n}{ypred}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}80}]:} [<matplotlib.lines.Line2D at 0x193a4488cf8>]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_2_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Hér teiknum við nálguðu punktana sem græna og frumgögnin eru blá. Sjáum
+að fyrir \(K=2\) fáum við ágætis nálgun við frumgögn.
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  {[}Locally weighted regression, LWR, 25 points{]} In LWR the predicted
+  value for point \(\hat{x}\) is obtained by fitting a local regression
+  model to the data. This is done by assigning individual weights to
+  points in the data set, depending on how close they are to \(\hat{x}\)
+  and minimizing the following cost function \[
+  J(\theta) = \frac{1}{2}\sum_{i=1}^n w_i (\theta^T x^{(i)} - y^{(i)})^2
+  \] where \(w_i > 0\) is the weight given to point \(x^{(i)}\). We will
+  use \[
+     w_i = \exp\left({-\frac{||\hat{x} - x^{(i)}||^2_2}{2\sigma^2}}\right), \qquad i=1,\ldots n
+  \] where \(\sigma>0\) is a parameter that needs to be specified.
+\end{enumerate}
+
+Note that the values of the \(w_i\)'s depend on the point \(\hat{x}\) we
+are predicting. It can be shown that the paramaters \(\theta\) that
+minimize the cost function can be obtained by solving a system of linear
+equations \[
+(X^T W X)\theta = (X^T W)y
+\] where \(W\) is a \(n \times n\) diagonal matrix with the \(w_i\)'s on
+the diagonal (\(W_{1,1}=w_1, W_{2,2}=w_2\) etc. and all other entries
+are zero). The prediction is then given by \(\hat{y}=\theta^T \hat{x}\).
+If we later want to make a prediction about another point, \(x'\), we
+need to recalculate the set of weights and obtain a new set of
+\(\theta\)'s.
+
+Create a function which implements LWR by solving the system of
+equations given above (see Jupyter notebook \texttt{vika\_01.ipynb} for
+details on how to do this with NumPy). Assume a local model on the form
+\(f_\theta(x)=\theta_0 + \theta_1 x\).
+
+Use LWR to fit the data in the \texttt{global.csv} dataset from problem
+1), after scaling the \(x\) values into \([0,1]\) with
+\(\tilde{x}^{(i)}=x^{(i)}/\max_{k=1 \ldots n}[x^{(k)}]\) to avoid
+numerical issues. Create a scatter plot which shows the original data
+points and superimpose predictions for each \(x\) value using
+\(\sigma=0.02\) (this value is not optimal for this data set, more on
+that later).
+
+\emph{Comments}: The following functions are useful: \texttt{numpy.dot},
+\texttt{numpy.linalg.norm}, \texttt{numpy.diag}, \texttt{math.exp}. Note
+that the \texttt{norm} and \texttt{diag} functions require NumPy arrays
+as inputs (rather than lists).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}81}]:} \PY{k+kn}{import} \PY{n+nn}{math}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         
+         \PY{k}{def} \PY{n+nf}{lwr\PYZus{}predict}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n}{xpred}\PY{p}{,}\PY{n}{sigma}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Locally weighted regression}
+             \PY{c+c1}{\PYZsh{}    X ....... Input variables}
+             \PY{c+c1}{\PYZsh{}    y ....... Output variable}
+             \PY{c+c1}{\PYZsh{}    xpred ... Point to predict}
+             \PY{c+c1}{\PYZsh{}    sigma ... Weight parameter (positive)}
+             \PY{c+c1}{\PYZsh{} Return value}
+             \PY{c+c1}{\PYZsh{}    ypred ... Predicted value at xpred}
+             \PY{k}{assert}\PY{p}{(}\PY{n}{sigma}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{n}{xpred} \PY{o}{=} \PY{p}{(}\PY{n}{xpred}\PY{o}{\PYZhy{}}\PY{n+nb}{min}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n+nb}{min}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}Skölum xpred á [0,1] líkt og X}
+             \PY{n}{X} \PY{o}{=} \PY{p}{(}\PY{n}{X}\PY{o}{\PYZhy{}}\PY{n+nb}{min}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n+nb}{min}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}Skölum X gögnin á [0,1]}
+             \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{c\PYZus{}}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{,}\PY{n}{X}\PY{p}{]} \PY{c+c1}{\PYZsh{} bætum við ásum í X\PYZhy{}fylkið til að fá mat á theta\PYZus{}0}
+             \PY{n}{W} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{n}{n}\PY{p}{)}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{W}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{i}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{xpred}\PY{o}{\PYZhy{}}\PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{sigma}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+             \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{solve}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{W} \PY{o}{@} \PY{n}{X} \PY{p}{,}\PY{n}{X}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{W} \PY{n+nd}{@y}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Insert code here}
+             \PY{c+c1}{\PYZsh{} ...}
+             \PY{n}{ypred} \PY{o}{=} \PY{n}{theta}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{theta}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{xpred}
+          
+             \PY{k}{return} \PY{n}{ypred}
+         
+         \PY{n}{X}\PY{p}{,}\PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{loadtxt}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{global.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{unpack}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}\PY{n}{skiprows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{sigma}\PY{o}{=}\PY{l+m+mf}{0.02}
+         \PY{n}{ypred} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{ypred}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{lwr\PYZus{}predict}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{n}{sigma}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{ypred}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Load data, predict and plot}
+         \PY{c+c1}{\PYZsh{} Insert code here}
+         \PY{c+c1}{\PYZsh{} ...}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}81}]:} [<matplotlib.lines.Line2D at 0x193a563c668>]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_5_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  {[}Model selection, 25 points{]} This is a continuation of the two
+  previous problems. Here you will use ''repeated subsampling'' to
+  determine an appropriate value of a hyper-parameter (we use this
+  strategy here rather than \(k\)-fold cross-validation since it is
+  easier to implement). The method is as follows:
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Iterate over a range of hyper-parameter values.
+\item
+  \(\quad\) Repeat 100 times:
+\item
+  \(\qquad\) Create a permutation of the dataset
+\item
+  \(\qquad\) Set 20\% of the (permuted) points aside to use as a test
+  set.
+\item
+  \(\qquad\) Use the remaining data points to fit a model using the
+  method of choice (LWR, k-NN reg. etc.)
+\item
+  \(\qquad\) Evaluate the MSE on the test set
+\item
+  \(\quad\) Calculate the average MSE for the 100 trials and store in a
+  vector
+\item
+  \(\quad\) (this becomes the prediction error estimate for the current
+  value of the hyper-parameter)
+\item
+  Return the hyper-parameter value that corresponds to the smallest MSE
+\end{enumerate}
+
+Implement the above model selection procedure for a given list of
+hyper-parameter values (see outline below).
+
+For both \(k\)-NN regression and LWR perform the following: Create a
+figure which shows how the MSE varies with the value of the
+hyper-parameter (\(k\) or \(\sigma\)). Select the parameter value
+corresponding to the smallest MSE and create a final figure showing how
+the resulting model fits the original data. Do you think that your model
+captures the original data sufficiently well? Which method would you
+reccommend for this data set? Describe why.
+
+\emph{Comments}: If you get the error message \texttt{Singular\ Matrix}
+when solving \((X^T W X)\theta = (X^T W)y\) for \(\theta\), the value of
+\(\sigma\) may be too small. For LWR, make sure that you are using the
+scaled \(X\)-values.
+
+The \texttt{math.floor} and \texttt{math.ceil} functions are handy for
+computing indices into the train and validation sets. The function
+\texttt{numpy.average} returns the average of an array. To create a
+numpy array of evenly spaced values use \texttt{numpy.linspace}. To
+locate the smallest element in an array use \texttt{numpy.argmin}. To
+create a randomly permuted copy of the dataset \((X,y)\) you can use
+
+\texttt{perm=numpy.random.permutation(len(y))}
+\texttt{Xperm=X{[}perm{]}} \texttt{yperm=y{[}perm{]}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}82}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k}{def} \PY{n+nf}{model\PYZus{}selection}\PY{p}{(}\PY{n}{func}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{testfr}\PY{p}{,} \PY{n}{parvals}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} model selection based on random subsampling}
+             \PY{c+c1}{\PYZsh{}    func .... Predictor function}
+             \PY{c+c1}{\PYZsh{}    X ....... Input variables}
+             \PY{c+c1}{\PYZsh{}    y ....... Output variable}
+             \PY{c+c1}{\PYZsh{}    testfr .. Fraction of data to use as test set (0 \PYZlt{} testfr \PYZlt{} 1)}
+             \PY{c+c1}{\PYZsh{}    parvals . Values of hyper\PYZhy{}parameter}
+             \PY{c+c1}{\PYZsh{} Return values}
+             \PY{c+c1}{\PYZsh{}    mse ..... Vector of MSE values corresponding to different hyper\PYZhy{}parameter values}
+             \PY{c+c1}{\PYZsh{}    bestpar . Best value of the hyper\PYZhy{}parameter}
+             \PY{k}{assert}\PY{p}{(}\PY{l+m+mi}{0} \PY{o}{\PYZlt{}} \PY{n}{testfr} \PY{o+ow}{and} \PY{n}{testfr} \PY{o}{\PYZlt{}} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{k}{assert}\PY{p}{(}\PY{n}{func}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lwr}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{or} \PY{n}{func}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{knn}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{n}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{n}{mse} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{parvals}\PY{p}{)}\PY{p}{)}
+             \PY{n}{k} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{parvals}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{k}\PY{p}{)}\PY{p}{:}    
+                 \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{perm}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{permutation}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)}
+                     \PY{n}{Xperm}\PY{o}{=}\PY{n}{X}\PY{p}{[}\PY{n}{perm}\PY{p}{]}
+                     \PY{n}{yperm}\PY{o}{=}\PY{n}{y}\PY{p}{[}\PY{n}{perm}\PY{p}{]}
+                     \PY{n}{m} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{testfr}\PY{o}{*}\PY{n}{n}\PY{p}{)}
+                     \PY{n}{X\PYZus{}test}\PY{o}{=}\PY{n}{Xperm}\PY{p}{[}\PY{p}{:}\PY{n}{m}\PY{p}{]}
+                     \PY{n}{y\PYZus{}test}\PY{o}{=}\PY{n}{yperm}\PY{p}{[}\PY{p}{:}\PY{n}{m}\PY{p}{]}
+                     \PY{n}{X\PYZus{}train}\PY{o}{=}\PY{n}{Xperm}\PY{p}{[}\PY{n}{m}\PY{p}{:}\PY{p}{]}
+                     \PY{n}{y\PYZus{}train}\PY{o}{=}\PY{n}{yperm}\PY{p}{[}\PY{n}{m}\PY{p}{:}\PY{p}{]}
+                     \PY{n}{ypred} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{m}\PY{p}{)}
+                     \PY{n}{err} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}
+                     \PY{k}{if} \PY{n}{func}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{knn}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                         \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{m}\PY{p}{)}\PY{p}{:}
+                             \PY{n}{ypred}\PY{p}{[}\PY{n}{s}\PY{p}{]} \PY{o}{=} \PY{n}{knn\PYZus{}reg\PYZus{}predict}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}
+                                         \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{[}\PY{n}{s}\PY{p}{]}\PY{p}{,} \PY{n}{parvals}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                     \PY{k}{if} \PY{n}{func}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lwr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                         \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{m}\PY{p}{)}\PY{p}{:}
+                             \PY{n}{ypred}\PY{p}{[}\PY{n}{s}\PY{p}{]} \PY{o}{=} \PY{n}{lwr\PYZus{}predict}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}
+                                         \PY{n}{y\PYZus{}train}\PY{p}{,}\PY{n}{X\PYZus{}test}\PY{p}{[}\PY{n}{s}\PY{p}{]}\PY{p}{,}\PY{n}{parvals}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{err}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{ypred}\PY{o}{\PYZhy{}}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+                 \PY{n}{mse}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{err}\PY{p}{)}
+             \PY{n}{bestpar} \PY{o}{=} \PY{n}{parvals}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{mse}\PY{o}{==}\PY{n+nb}{min}\PY{p}{(}\PY{n}{mse}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+           
+             \PY{k}{return} \PY{p}{(}\PY{n}{mse}\PY{p}{,} \PY{n}{bestpar}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Load data, perform model selection, predict and plot}
+         \PY{c+c1}{\PYZsh{} Insert code here}
+         \PY{n}{X}\PY{p}{,}\PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{loadtxt}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{global.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{unpack}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}\PY{n}{skiprows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{n}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         \PY{n}{parvals\PYZus{}lwr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{0.004}\PY{p}{,}\PY{l+m+mf}{0.08}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{mse\PYZus{}lwr}\PY{p}{,} \PY{n}{bestpar\PYZus{}lwr} \PY{o}{=} \PY{n}{model\PYZus{}selection}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lwr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{l+m+mf}{0.2}\PY{p}{,}\PY{n}{parvals\PYZus{}lwr}\PY{p}{)}
+         \PY{n}{parvals\PYZus{}knn} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{mse\PYZus{}knn}\PY{p}{,} \PY{n}{bestpar\PYZus{}knn} \PY{o}{=} \PY{n}{model\PYZus{}selection}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{knn}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{l+m+mf}{0.2}\PY{p}{,}\PY{n}{parvals\PYZus{}knn}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bestpar fyrir lwr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{bestpar\PYZus{}lwr}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mse fyrir lwr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{mse\PYZus{}lwr}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bestpar fyrir knn}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{bestpar\PYZus{}knn}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mse fyrir knn}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{mse\PYZus{}knn}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{parvals\PYZus{}lwr}\PY{p}{,}\PY{n}{mse\PYZus{}lwr}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lwr\PYZhy{}MSE vs. sigma}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sigma}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MSE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{parvals\PYZus{}knn}\PY{p}{,}\PY{n}{mse\PYZus{}knn}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{K}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MSE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{knn\PYZhy{}MSE vs. K}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{ypred\PYZus{}knn} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+         \PY{n}{ypred\PYZus{}lwr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+             \PY{n}{ypred\PYZus{}knn}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{knn\PYZus{}reg\PYZus{}predict}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{n+nb}{int}\PY{p}{(}\PY{n}{bestpar\PYZus{}knn}\PY{p}{)}\PY{p}{)}
+             \PY{n}{ypred\PYZus{}lwr}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{lwr\PYZus{}predict}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{n}{bestpar\PYZus{}lwr}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{ypred\PYZus{}knn}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{ypred\PYZus{}lwr}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Samanburður á ályktunargildum fyrir knn og lwr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZhy{}ályktun}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+bestpar fyrir lwr [0.028]
+mse fyrir lwr [1.00208264e-04 9.31981368e-05 1.02465570e-04 8.99334614e-05
+ 7.86882282e-05 9.66892759e-05 6.66982366e-05 1.23431125e-04
+ 7.99965672e-05 6.72839846e-05 1.14471606e-04 8.43068855e-05
+ 8.63443847e-05 8.07585578e-05 1.06119442e-04 1.39617950e-04
+ 1.31350954e-04 1.32599087e-04 1.11478344e-04 9.60730358e-05]
+bestpar fyrir knn [9]
+mse fyrir knn [1.12499318e-04 1.20361987e-04 7.50958712e-05 1.15214448e-04
+ 1.46043577e-04 1.25559691e-04 8.32072254e-05 6.30890123e-05
+ 1.60814588e-04 1.58352800e-04 8.36649790e-05 1.17451517e-04
+ 1.04839052e-04 1.03149422e-04 9.84987003e-05 1.25525299e-04
+ 1.56990114e-04 1.22925144e-04 9.38525886e-05 1.08323190e-04
+ 8.97258196e-05 1.33515962e-04 1.59332766e-04 1.61500706e-04
+ 2.19510491e-04 1.14727075e-04 1.31463514e-04 2.13706618e-04]
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_7_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_7_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}82}]:} Text(0,0.5,'y-ályktun')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_7_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Við teiknum hérna 3 myndir. Fyrsta myndin sýnir samband \emph{MSE} við
+\(\sigma\) í \emph{lwr}-módelinu, önnur myndin sýnir samband \emph{MSE}
+við \(K\) í \emph{KNN}-módelinu og sú þriðja sýnir samanburð á
+ályktunargildum fyrir \emph{KNN} og \emph{LWR} þar sem rauða línan er
+fyrir \emph{LWR} en blá línan er fyrir \emph{KNN}. Samanburður á
+\emph{MSE} gildum fyrir líkönin sýnir lítinn mun en \emph{LWR} líkanið
+gefur matgögn sem flökkta minna en \emph{KNN}. Af þeirri ályktun myndi
+ég velja \emph{LWR} frekar en \emph{KNN}.
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  {[}Regression with scikit-learn{]} The file \texttt{bike\_sharing.csv}
+  contains usage data collected by a bike sharing company on a daily
+  basis over a two year period. The task is to model the total number of
+  bikes rented in a single day using information about the date and
+  weather on the day of rental.
+\end{enumerate}
+
+Use the following variables as inputs:
+\texttt{season\ yr\ mnth\ holiday\ weekday\ workingday\ weathersit\ atemp\ hum\ windspeed}.
+The output variable is the total number of bikes rented each day
+(variable \texttt{cnt}). In this data set the number of rentals is split
+between casual and registered customers. The corresponding values are
+stored in columns \texttt{casual} and \texttt{registered} and should be
+excluded from your model (since cnt=casual+registered).
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  Start by reading the data from the file, remove columns that are to be
+  omitted and then use scikit-learn to create a train/test split (use
+  the default 0.33/42 settings). Fit a linear model to the training set
+  using scikit-learn's \texttt{LinearRegression} and provide the model
+  coefficients, the test set mean square error and \(R^2\) coefficient.
+\end{enumerate}
+
+\emph{Comments}: A brief description of the data set can be found here:
+https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset
+
+Creating train/test splits with scikit-learn:
+http://scikit-learn.org/stable/modules/generated/sklearn.model\_selection.train\_test\_split.html
+
+Scikit-learn linear regression example:
+http://scikit-learn.org/stable/auto\_examples/linear\_model/plot\_ols.html
+
+The \(R^2\) coefficient is a normalized measure of model fit that is
+often used in regression. A value of 1.0 indicates perfect fit whereas
+values close to zero or negative values indicate a bad fit. The
+coefficient is defined as \(R^2=1-\)MSE\_model\_fit / MSE\_total where
+MSE\_model\_fit is the mean square error of the model with respect to
+the (test) data and MSE\_total is the variance in the \(y\)-values. This
+value is provided by the regression object's \texttt{score} function.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{linear\PYZus{}model}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{,} \PY{n}{r2\PYZus{}score}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+         
+         \PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{loadtxt}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bike\PYZus{}sharing.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{unpack}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}\PY{n}{skiprows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{c\PYZus{}}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{8}\PY{p}{]}\PY{p}{,}\PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{:}\PY{l+m+mi}{12}\PY{p}{]}\PY{p}{]}
+         \PY{n}{y} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{]}
+         
+         \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,}
+                                             \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.33}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+         \PY{n}{regr} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{regr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{regr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Coefficients: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{regr}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MSE:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}pred}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{R squared:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{r2\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}pred}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}pred}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Coefficients: 
+ [  520.43069208  1981.40075606   -44.30319842  -445.64029886
+    61.64823971   126.7062357   -613.16098572  6075.13989467
+ -1048.85338395 -2239.95175155]
+MSE: 735709.8407670457
+R squared: 0.8108632389431624
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}83}]:} <matplotlib.collections.PathCollection at 0x193a55e4978>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Here you are to fit a linear model using Lasso regression (see notes
+  from the 2nd week for details) on the bike sharing data. Use the same
+  train/test split as in a) but you now perform cross-validation using
+  the \emph{training set} to select the optimal value of the
+  regularization parameter. Provide a graph which shows the
+  cross-validation error for several values of the regularization
+  parameter (e.g. between 0.1 and 1). Fit a Lasso model using the
+  optimal value of the regularization parameter and the whole training
+  set, provide the model coefficients and report the mean square error
+  on the \emph{test set}. How does this compare to the model you found
+  in a)?
+\end{enumerate}
+
+\emph{Comments}: Lasso regression in scikit-learn (the regularization
+parameter is called \texttt{alpha}):
+https://scikit-learn.org/stable/modules/generated/sklearn.linear\_model.Lasso.html
+
+Cross-validation in scikit-learn, section 3.1 and the
+\texttt{cross\_val\_score} function in particular in section 3.1.1. For
+the Lasso regression object, the default metric is the \(R^2\)
+coefficient:
+https://scikit-learn.org/stable/modules/cross\_validation.html
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{datasets}\PY{p}{,} \PY{n}{linear\PYZus{}model}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{,} \PY{n}{r2\PYZus{}score}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{cross\PYZus{}val\PYZus{}score}
+        
+        \PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{loadtxt}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bike\PYZus{}sharing.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{unpack}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}\PY{n}{skiprows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{c\PYZus{}}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{8}\PY{p}{]}\PY{p}{,}\PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{:}\PY{l+m+mi}{12}\PY{p}{]}\PY{p}{]}
+        \PY{n}{y} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{]}
+        
+        
+        \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,}
+                                        \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.33}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{40}\PY{p}{)}
+        \PY{n}{mean\PYZus{}scores} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+        \PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{l+m+mf}{1.1}\PY{p}{,}\PY{l+m+mf}{0.1}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+            \PY{n}{lasso} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{Lasso}\PY{p}{(}\PY{n}{alpha}\PY{o}{=}\PY{n}{a}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+            \PY{n}{lasso}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+            \PY{n}{scores} \PY{o}{=} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{lasso}\PY{p}{,}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{,}\PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+            \PY{n}{mean\PYZus{}scores}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{scores}\PY{p}{)}    
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alpha:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{median scores:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{mean\PYZus{}scores}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+            
+        \PY{c+c1}{\PYZsh{}y\PYZus{}pred = lasso.predict(X\PYZus{}test)}
+        \PY{c+c1}{\PYZsh{}print(\PYZsq{}scores:\PYZsq{},scores)}
+        \PY{c+c1}{\PYZsh{}print(\PYZsq{}MSE:\PYZsq{}, mean\PYZus{}squared\PYZus{}error(y\PYZus{}test,y\PYZus{}pred))}
+        \PY{c+c1}{\PYZsh{}print(\PYZsq{}R squared:\PYZsq{}, r2\PYZus{}score(y\PYZus{}test,y\PYZus{}pred))}
+        \PY{c+c1}{\PYZsh{}print(\PYZsq{}alpha:\PYZsq{}, alpha)}
+        \PY{n}{max\PYZus{}alpha\PYZus{}index} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{mean\PYZus{}scores}\PY{o}{==}\PY{n+nb}{max}\PY{p}{(}\PY{n}{mean\PYZus{}scores}\PY{p}{)}\PY{p}{)} 
+        \PY{n}{lasso} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{Lasso}\PY{p}{(}\PY{n}{alpha}\PY{o}{=}\PY{n}{a}\PY{p}{[}\PY{n}{max\PYZus{}alpha\PYZus{}index}\PY{p}{]}\PY{p}{)}
+        \PY{n}{lasso}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Coefficients: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{lasso}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{)}   
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{mean\PYZus{}scores}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+alpha: 0.1 median scores: 0.8149368104006802
+alpha: 0.2 median scores: 0.8149511776715684
+alpha: 0.3 median scores: 0.8149626864454278
+alpha: 0.4 median scores: 0.8149720996954498
+alpha: 0.5 median scores: 0.8149787418699717
+alpha: 0.6 median scores: 0.8149835883239074
+alpha: 0.7 median scores: 0.8149854064273621
+alpha: 0.8 median scores: 0.8149847345205394
+alpha: 0.9 median scores: 0.8149818406557715
+alpha: 1.0 median scores: 0.8149764645384178
+Coefficients: 
+ [  536.57165009  2028.67978319   -47.47284793  -697.28132711
+    74.00229246   123.03240037  -649.14027781  6098.94938518
+ -1102.08904697 -2196.83545915]
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1}]:} [<matplotlib.lines.Line2D at 0x1b3341f6400>]
+\end{Verbatim}
+            
+    Athuga að ég breytti random\_state í \(40\) úr \(42\) í
+train\_test\_split til að fá áhugaverðari niðurstöðu. Sjáum að hér fáum
+við örlítið betri fylgni heldur en í a) lið.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

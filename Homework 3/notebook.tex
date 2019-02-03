@@ -1,0 +1,1011 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{hw3}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{REI602M Machine Learning - Homework
+3}\label{rei602m-machine-learning---homework-3}
+
+\subsubsection{Due: Thursday 3.2.2019}\label{due-thursday-3.2.2019}
+
+\textbf{Objectives}: Logistic regression, k-Nearest neighbors, debugging
+machine learning algorithms.
+
+\textbf{Name}: Emil Gauti Friðriksson, \textbf{email: } egf3@hi.is,
+\textbf{collaborators:} Alexander Guðjónsson
+
+Please provide your solutions by filling in the appropriate cells in
+this notebook, creating new cells as needed. Hand in your solution on
+Gradescope, taking care to locate the appropriate page numbers in the
+PDF document. Make sure that you are familiar with the course rules on
+collaboration (encouraged) and copying (very, very, bad).
+
+\emph{Note}: Problems 1 and 2 are fairly straightforward but the running
+times are long. \emph{Start early!}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  {[}Classification of handwritten digits, 40 points{]} The MNIST
+  database of handwritten digits set is a classic machine learning
+  benchmark. It consists of 70,000 digitized images of handwritten
+  digits, split into a training set with 60,000 examples and a test set
+  with 10,000 examples. Each image is a grayscale 28x28 bitmap. In this
+  problem you will evaluate the performance of a logistic regression
+  classifier applied to the raw image data. In the beginning you should
+  use a random subset of the training data with say 10K examples, and
+  possibly the validation data as well. Once your code appears to be
+  running correctly you should increase the amount of training (and
+  validation) data.
+\end{enumerate}
+
+\begin{figure}
+\centering
+\includegraphics{mnist_0-9.png}
+\caption{digits}
+\end{figure}
+
+Download the dataset from
+\texttt{https://notendur.hi.is/steinng/kennsla/2019/ml/data/mnist.npz}
+(18 MB). The original 60,000 training set has been split into a "new"
+training set with 55,000 examples and a validation set with 5,000
+examples to be used for model selection (tuning of hyper-parameters) in
+problem 2).
+
+The 28x28 images have been stacked in 784-element vectors which serve as
+input to the training/test procedures. A pre-processing scaling step is
+not needed for this particular data set.
+
+\emph{Comments}: To visualize the raw images you can use:
+`matplotlib.pyplot.imshow(1-x\_test{[}0{]}.reshape(28,28),interpolation='none',cmap='gray')
+\# x\_test{[}0{]} is the first test example
+
+A description of the MNIST data set can be found here:
+http://yann.lecun.com/exdb/mnist/
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  {[}10 points{]} Train a multi-class logistic regression classifier and
+  evaluate its performance on the test set using the scikit-learn
+  package (see v03\_logreg.pynb on Piazza). Report the training and test
+  set error rates.
+\end{enumerate}
+
+\emph{Comments}: The \texttt{LogisticRegression} class handles
+multi-class problems via a one-vs-all scheme. This implementation
+actually performs regularized logistic regression (2-norm by default)
+with the level of regularization is controlled by a parameter called
+\texttt{C} but here we use the default setting (which happens to be
+close to optimal).
+
+The function \texttt{LogisticRegression.score} returns the (mean)
+classifier accuracy.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LogisticRegression}
+        
+        \PY{n}{data}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mnist.npz}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{X\PYZus{}train}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{y\PYZus{}train}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{X\PYZus{}val}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}val}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{y\PYZus{}val}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}val}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{X\PYZus{}test}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{y\PYZus{}test}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{n}{logistR} \PY{o}{=} \PY{n}{LogisticRegression}\PY{p}{(}\PY{p}{)}
+        \PY{n}{logistR}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1}]:} LogisticRegression(C=1.0, class\_weight=None, dual=False, fit\_intercept=True,
+                  intercept\_scaling=1, max\_iter=100, multi\_class='ovr', n\_jobs=1,
+                  penalty='l2', random\_state=None, solver='liblinear', tol=0.0001,
+                  verbose=0, warm\_start=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test accuracy: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{logistR}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+        \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{logistR}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test Error:     }\PY{l+s+si}{\PYZob{}0:1.4f\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{y\PYZus{}pred} \PY{o}{!=} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train accuracy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n+nb}{round}\PY{p}{(}\PY{n}{logistR}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+        \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{logistR}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train Error:    }\PY{l+s+si}{\PYZob{}0:1.4f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{y\PYZus{}pred} \PY{o}{!=} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test accuracy:  0.9198
+Test Error:     0.0802 
+Train accuracy: 0.9262
+Train Error:    0.0738
+
+    \end{Verbatim}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  {[}10 points{]} i) How does the test error in a) compare with the
+  results reported on Yann LeCun's page (see above)? ii) Obtain a
+  confusion matrix for the test set. Which classes are most often
+  incorrectly classified? iii) Create a 5 x 5 figure showing examples of
+  incorrectly classified images (label each image with the correct
+  classification).
+\end{enumerate}
+
+\emph{Comments}: A \emph{confusion matrix} is a n\_class by n\_class
+matrix where the element in row \(i\) and column \(j\) corresponds to
+the number of times class \(i\) was classified as \(j\). Diagonal
+elements thus correspond to correct classifications and off-diagonal
+elements to misclassifications. You can use the
+\texttt{sklearn.metrics.confusion\_matrix} function to construct this
+matrix.
+
+Use \texttt{matplotlib.pyplot.subplot} to create the 5 x 5 figure.
+
+    \textbf{(i)} The test error we find from using the LogisticRegression
+fitting on the test data is \(E_{Test} =1-0.9198 = 0.0802 = 8.02\%\) and
+the error on using the same fit on the training data is:
+\(E_{Train} = 1-0.9262 = 0.0738 = 7.38\%\). The test error rate that
+Yann LeCun reports for not preprocessed linear classifier(1-layer NN) is
+considerably higher than we find:
+\(E_{\text{LeCun-Test}} = 12.0\% > 8.02\% = E_{Test}\)
+
+    \textbf{(ii)} Confusion matrix:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{metrics}
+        
+        \PY{n}{cm} \PY{o}{=} \PY{n}{metrics}\PY{o}{.}\PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{logistR}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{cm}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bwr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Confusion matrix}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Raunverulegt gildi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Metið gildi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{colorbar}\PY{p}{(}\PY{p}{)}
+        \PY{n}{n} \PY{o}{=} \PY{n}{cm}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n}{p} \PY{o}{=} \PY{n}{cm}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{p}\PY{p}{)}\PY{p}{:}       
+                \PY{n}{plt}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{cm}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{xy}\PY{o}{=}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{)}\PY{p}{,} 
+                             \PY{n}{horizontalalignment}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{verticalalignment}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_8_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Við sjáum að algengasti ruglingurinn er þegar talan \(5\) er metin sem
+talan \(3\). Það virðist einnig vera algengt að talan \(2\) er metin sem
+talan \(8\)
+
+    \textbf{(iii)} a 5 x 5 figure showing examples of incorrectly classified
+images:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{)}
+        \PY{n}{wrong} \PY{o}{=} \PY{p}{[}\PY{p}{]} 
+        \PY{n}{predict} \PY{o}{=} \PY{n}{logistR}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{predict}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{!=} \PY{n}{y\PYZus{}test}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{:}
+                \PY{n}{wrong}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+        
+        \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{row}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{fig}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{hspace}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{wspace}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}
+        \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}figheight}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{)}
+        \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}figwidth}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{)}
+        \PY{n}{index}\PY{o}{=}\PY{l+m+mi}{0}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}        
+                \PY{n}{ax}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{X\PYZus{}test}\PY{p}{[}\PY{n}{wrong}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{28}\PY{p}{,}\PY{l+m+mi}{28}\PY{p}{)}\PY{p}{,}
+                                \PY{n}{interpolation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{ax}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Metið: }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{predict}\PY{p}{[}\PY{n}{wrong}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{o}{+}
+                                   \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{, Raunverulegt: }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{[}\PY{n}{wrong}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                \PY{n}{index} \PY{o}{=} \PY{n}{index}\PY{o}{+}\PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  {[}20 points{]} Here you are to perform \emph{feature engineering}
+  with the goal of increasing classifier accuracy. Feature engineering
+  is sometimes done by exploiting knowledge about the problem domain but
+  here a generic but counter-intuitive strategy that sometimes works
+  well is used. The new features are given by nonlinear functions of
+  \emph{random} linear combiniations of the original features and are
+  added to the original feature set.
+\end{enumerate}
+
+Let \(q\) denote the number of variables to be added, e.g. \(q=500\) or
+\(q=1000\). For a 784-element vector \(x\), the new (derived) variables
+are given by \(\max{((Rx)_j,0)}),~j=1,\ldots,q\) where \(R\) is a
+\(q \times 784\) matrix with elements which are selected at random,
+\(R_{ij}=\pm 1\). Fyrir each image in the training and test sets you add
+\(q\) such elements. You then train a classifier using the augmented
+training set as in a) and evaluate its accuracy on the augmented test
+set.
+
+\emph{Comments}: \((Rx)_j\) denotes the \(j\)-th element of the
+matrix-vector product \(Rx\).
+
+You can use \texttt{np.random.randint} to create a random 0/1 vector
+which you then transform to \(pm~1\) values. You can use
+\texttt{np.maximum} for the max-operation.
+
+You create a separate \(R\)-matrix for each value of \(q\) and use the
+same matrix for both the training and test sets.
+
+You may want to use a stochastic gradient solver instead of the default
+solver used by \texttt{LogisticRegression.fit}. To do this use
+\texttt{solver=saga} when constructing the LogReg class object.
+
+If you have a fast computer you might want to try \(q=5,000\) and 10,000
+as well. Start with subsets of the training and test sets and fairly
+small values of \(q\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{n}{q} \PY{o}{=} \PY{l+m+mi}{500}
+         \PY{n}{X\PYZus{}train\PYZus{}s} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{500}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+         \PY{n}{X\PYZus{}test\PYZus{}s} \PY{o}{=} \PY{n}{X\PYZus{}test}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{50}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+         \PY{n}{y\PYZus{}train\PYZus{}s} \PY{o}{=} \PY{n}{y\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{500}\PY{p}{]}
+         \PY{n}{y\PYZus{}test\PYZus{}s} \PY{o}{=} \PY{n}{y\PYZus{}test}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{50}\PY{p}{]}
+         \PY{n}{n} \PY{o}{=} \PY{n}{X\PYZus{}train\PYZus{}s}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{p} \PY{o}{=} \PY{n}{X\PYZus{}train\PYZus{}s}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{R} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{q}\PY{p}{,}\PY{n}{p}\PY{p}{)}\PY{p}{)}
+         \PY{n}{R} \PY{o}{=} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{R}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{c+c1}{\PYZsh{} smíðum R\PYZhy{}fylkið með gildi pm1}
+         \PY{n}{X\PYZus{}train\PYZus{}c} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{n}{p}\PY{o}{+}\PY{n}{q}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+             \PY{n}{Rx} \PY{o}{=} \PY{n}{R}\PY{n+nd}{@X\PYZus{}train\PYZus{}s}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+             \PY{n}{c} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}s}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{q}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{c} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{c}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{maximum}\PY{p}{(}\PY{n}{Rx}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+             \PY{n}{X\PYZus{}train\PYZus{}c}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{c}
+             
+         \PY{n}{m} \PY{o}{=} \PY{n}{X\PYZus{}test\PYZus{}s}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{X\PYZus{}test\PYZus{}c} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{q}\PY{o}{+}\PY{n}{p}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{:}
+             \PY{n}{Rx} \PY{o}{=} \PY{n}{R}\PY{n+nd}{@X\PYZus{}test\PYZus{}s}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+             \PY{n}{c} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}s}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{q}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{c} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{c}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{maximum}\PY{p}{(}\PY{n}{Rx}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+             \PY{n}{X\PYZus{}test\PYZus{}c}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{c}
+             
+         \PY{n}{LogistRc} \PY{o}{=} \PY{n}{LogisticRegression}\PY{p}{(}\PY{n}{solver} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{saga}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{LogistRc}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}c}\PY{p}{,}\PY{n}{y\PYZus{}train\PYZus{}s}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}snati\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}sag.py:326: ConvergenceWarning: The max\_iter was reached which means the coef\_ did not converge
+  "the coef\_ did not converge", ConvergenceWarning)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}69}]:} LogisticRegression(C=1.0, class\_weight=None, dual=False, fit\_intercept=True,
+                   intercept\_scaling=1, max\_iter=100, multi\_class='ovr', n\_jobs=1,
+                   penalty='l2', random\_state=None, solver='saga', tol=0.0001,
+                   verbose=0, warm\_start=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test accuracy: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{LogistRc}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}c}\PY{p}{,}\PY{n}{y\PYZus{}test\PYZus{}s}\PY{p}{)}\PY{p}{)}
+         \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{LogistRc}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}c}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test Error:     }\PY{l+s+si}{\PYZob{}0:1.4f\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{y\PYZus{}pred} \PY{o}{!=} \PY{n}{y\PYZus{}test\PYZus{}s}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train accuracy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n+nb}{round}\PY{p}{(}\PY{n}{LogistRc}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}c}\PY{p}{,}\PY{n}{y\PYZus{}train\PYZus{}s}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+         \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{LogistRc}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}c}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train Error:    }\PY{l+s+si}{\PYZob{}0:1.4f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{y\PYZus{}pred} \PY{o}{!=} \PY{n}{y\PYZus{}train\PYZus{}s}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test accuracy:  0.92
+Test Error:     0.0800 
+Train accuracy: 1.0
+Train Error:    0.0000
+
+    \end{Verbatim}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  {[}Nearest neighbor classifiers, 30 points{]} In this exercise you
+  train a \(k\)-NN classifier on the MNIST data set, use the validation
+  set to select an optimal value of \(k\) in the range {[}1,12{]} and
+  classify the test set.
+\end{enumerate}
+
+\emph{Comments}: Use the \texttt{neighbors.KNeighborsClassifier}
+implementation in scikit-learn with \texttt{n\_jobs=-1} to utilize
+multiple CPU cores.
+
+The results reported on Yann LeCun's page suggest that the \(L_3\) norm
+gives slightly better results than the Euclidean (\(L_2\)) norm which is
+the default distance metric in \texttt{KNeighborsClassifier}. The
+\(L_p\)-norm of a vector \(x \in R^n\) is defined as
+\((|x_1|^p + \ldots |x_n|^p)^{(1/p)}\).
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  {[}10 points{]} Create a plot showing the training and validation
+  accuracy as a function of \(k\). Which \(k\) value is optimal?
+\end{enumerate}
+
+\emph{Comment}: You should probably start by using a random subset of
+the training data (and possibly the validation data) since running times
+are quite long.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neighbors} \PY{k}{import} \PY{n}{KNeighborsClassifier}
+         \PY{c+c1}{\PYZsh{}fækkum gögnunum okkar}
+         \PY{n}{X\PYZus{}train\PYZus{}s} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{5000}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+         \PY{n}{X\PYZus{}test\PYZus{}s} \PY{o}{=} \PY{n}{X\PYZus{}test}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{500}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+         \PY{n}{y\PYZus{}train\PYZus{}s} \PY{o}{=} \PY{n}{y\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{5000}\PY{p}{]}
+         \PY{n}{y\PYZus{}test\PYZus{}s} \PY{o}{=} \PY{n}{y\PYZus{}test}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{500}\PY{p}{]}
+         \PY{n}{K} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{13}\PY{p}{)}
+         \PY{n}{error} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{K}\PY{p}{)}\PY{p}{)}
+         
+         
+         
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{K}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{knn} \PY{o}{=} \PY{n}{KNeighborsClassifier}\PY{p}{(}\PY{n}{n\PYZus{}neighbors} \PY{o}{=} \PY{n}{K}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{n}{p}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{knn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}s}\PY{p}{,}\PY{n}{y\PYZus{}train\PYZus{}s}\PY{p}{)}
+             \PY{n}{error}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{knn}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}val}\PY{p}{,}\PY{n}{y\PYZus{}val}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{error}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+             
+         
+         
+         \PY{c+c1}{\PYZsh{}plottum niðurstöðurnar}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{K}\PY{p}{,}\PY{n}{error}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{K}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Error vs. K}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Error 1 : 0.04820000000000002
+Error 2 : 0.05800000000000005
+Error 3 : 0.0494
+Error 4 : 0.0494
+Error 5 : 0.0484
+Error 6 : 0.04820000000000002
+Error 7 : 0.04920000000000002
+Error 8 : 0.050000000000000044
+Error 9 : 0.0514
+Error 10 : 0.052200000000000024
+Error 11 : 0.052000000000000046
+Error 12 : 0.05159999999999998
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  {[}10 points{]} Select an appropriate value of \(k\) based on a) and
+  classify the test set and report the test set accuracy.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neighbors} \PY{k}{import} \PY{n}{KNeighborsClassifier}
+         \PY{n}{k\PYZus{}0} \PY{o}{=} \PY{l+m+mi}{6} \PY{c+c1}{\PYZsh{} skv a) lið er k\PYZus{}0 = 1 eða k\PYZus{}0 = 6}
+         \PY{n}{X\PYZus{}train\PYZus{}s} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{5000}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+         \PY{n}{X\PYZus{}test\PYZus{}s} \PY{o}{=} \PY{n}{X\PYZus{}test}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{500}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+         \PY{n}{y\PYZus{}train\PYZus{}s} \PY{o}{=} \PY{n}{y\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{5000}\PY{p}{]}
+         \PY{n}{y\PYZus{}test\PYZus{}s} \PY{o}{=} \PY{n}{y\PYZus{}test}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{500}\PY{p}{]}
+         
+         \PY{n}{knn} \PY{o}{=} \PY{n}{KNeighborsClassifier}\PY{p}{(}\PY{n}{n\PYZus{}neighbors} \PY{o}{=} \PY{n}{k\PYZus{}0}\PY{p}{,}\PY{n}{p}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{n\PYZus{}jobs} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{knn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}s}\PY{p}{,}\PY{n}{y\PYZus{}train\PYZus{}s}\PY{p}{)}
+         
+         \PY{n}{error} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{knn}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test set accuracy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{error}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test set Error:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{error}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test set accuracy: 0.9339
+Test set Error: 0.06610000000000005
+
+    \end{Verbatim}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  {[}10 points{]} Do the \(k\)-NN and logistic regression classifier
+  make similar mistakes? Comment briefly on using a \(k\)-NN classifier
+  vs logistic regression for the MNIST data set.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{metrics}
+         
+         \PY{n}{cm} \PY{o}{=} \PY{n}{metrics}\PY{o}{.}\PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{knn}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{cm}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bwr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Confusion matrix KNN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Raunverulegt gildi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Metið gildi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{colorbar}\PY{p}{(}\PY{p}{)}
+         \PY{n}{n} \PY{o}{=} \PY{n}{cm}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{p} \PY{o}{=} \PY{n}{cm}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{p}\PY{p}{)}\PY{p}{:}       
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{cm}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{xy}\PY{o}{=}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{)}\PY{p}{,} 
+                              \PY{n}{horizontalalignment}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{verticalalignment}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{metrics}
+         
+         \PY{n}{cm} \PY{o}{=} \PY{n}{metrics}\PY{o}{.}\PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{logistR}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{cm}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bwr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Confusion matrix Logistic Regression}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Raunverulegt gildi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Metið gildi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{colorbar}\PY{p}{(}\PY{p}{)}
+         \PY{n}{n} \PY{o}{=} \PY{n}{cm}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{p} \PY{o}{=} \PY{n}{cm}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{p}\PY{p}{)}\PY{p}{:}       
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{cm}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{xy}\PY{o}{=}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{)}\PY{p}{,}
+                              \PY{n}{horizontalalignment}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{verticalalignment}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Logist Regression Test accuracy: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{logistR}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{logistR}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Logist Regression Test Error:     }
+               \PY{p}{\PYZob{}}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mf}{1.4}\PY{n}{f}\PY{p}{\PYZcb{}} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.format(np.average(y\PYZus{}pred != y\PYZus{}test)))}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{KNN Test set accuracy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{error}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{KNN Test set Error:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{error}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Logist Regression Test accuracy:  0.9198
+Logist Regression Test Error:     0.0802 
+KNN Test set accuracy: 0.9339
+KNN Test set Error: 0.06610000000000005
+
+    \end{Verbatim}
+
+    Sjáum að Confusion matrix fyrir KNN er frábrugðið confusion matrix fyrir
+Logistic regression. En einnig jafnvel þótt við notuðum einungis
+\(\approx 10\%\) af X\_train í KNN þá erum við að fá meira accuracy þar
+þegar við notum modelið á öll test-gögnin. Ég myndi því velja KNN umfram
+Logistic regression þó svo að keyrslutími sé umtalsvert lengri.
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  {[}Debugging machine learning algorithms, 30 points{]} In this problem
+  (taken from Andrew Ng's machine learning course at Stanford), we will
+  be delving deeper into the workings of logistic regression. The goal
+  of this problem is to help you develop your skills debugging machine
+  learning algorithms (which can be very different from debugging
+  software in general).
+\end{enumerate}
+
+Recall that logistic regression fits a model on the form \[
+f_\theta(x) = g(\theta^T x) = \frac{1}{1+\exp(-\theta^T x)}
+\] by maximizing the corresponding log-likelihood function
+\(l(\theta)\).
+
+The file \texttt{lr\_debug.py} contains an implementation of a batch
+gradient descent algorithm for logistic regression. The algorithm
+continues until the change in \(\theta\) between iterations becomes very
+small (less than \(10^{-15}\)). Two labeled datasets hw3\_data\_a.txt,
+and hw3\_data\_b.txt (datasets A and B) are also provided. Please do not
+modify the code for the logistic regression training algorithm for this
+problem (other than for debugging purposes). First, run the given
+logistic regression code to train two different models on A and B.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  {[}5 points{]} What is the most notable difference in training the
+  logistic regression model on datasets A and B?
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{k+kn}{import} \PY{n+nn}{lr\PYZus{}debug}
+         \PY{n}{lr\PYZus{}debug}\PY{o}{.}\PY{n}{main}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+==== Training model on data set A ====
+Finished 10000 iterations
+Finished 20000 iterations
+Finished 30000 iterations
+Converged in 30368 iterations
+
+==== Training model on data set B ====
+Finished 10000 iterations
+Finished 20000 iterations
+Finished 30000 iterations
+Finished 40000 iterations
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        KeyboardInterrupt                         Traceback (most recent call last)
+
+        <ipython-input-68-7e0af4c24dbe> in <module>()
+          1 import lr\_debug
+    ----> 2 lr\_debug.main()
+    
+
+        \textasciitilde{}\textbackslash{}Documents\textbackslash{}Eðlisfræði\textbackslash{}Gervigreind vor 2019\textbackslash{}Homework 3\textbackslash{}lr\_debug.py in main()
+         61     print('\textbackslash{}n==== Training model on data set B ====')
+         62     Xb, Yb = load\_data('hw3\_data\_b.txt')
+    ---> 63     logistic\_regression(Xb, Yb)
+         64 
+         65     return
+    
+
+        \textasciitilde{}\textbackslash{}Documents\textbackslash{}Eðlisfræði\textbackslash{}Gervigreind vor 2019\textbackslash{}Homework 3\textbackslash{}lr\_debug.py in logistic\_regression(X, Y)
+         45         i += 1
+         46         prev\_theta = theta
+    ---> 47         grad = calc\_grad(X, Y, theta)
+         48         theta = theta  - learning\_rate * (grad)
+         49         if i \% 10000 == 0:
+    
+
+        \textasciitilde{}\textbackslash{}Documents\textbackslash{}Eðlisfræði\textbackslash{}Gervigreind vor 2019\textbackslash{}Homework 3\textbackslash{}lr\_debug.py in calc\_grad(X, Y, theta)
+         27     margins = Y * X.dot(theta)
+         28     probs = 1. / (1 + np.exp(margins))
+    ---> 29     grad = -(1./m) * (X.T.dot(probs * Y))
+         30 
+         31     return grad
+    
+
+        KeyboardInterrupt: 
+
+    \end{Verbatim}
+
+    a : Converged in 30368 iterations b : Does not converge.
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  {[}10 points{]} Investigate why the training procedure behaves
+  unexpectedly on dataset B, but not on A. Provide hard evidence (in the
+  form of math, code, plots, etc.) to corroborate your hypothesis for
+  the misbehavior. Remember, you should address why your explanation
+  does not apply to A. \emph{Hint}: The issue is not a numerical
+  rounding or over/underflow error.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{n}{ya}\PY{p}{,} \PY{n}{Xa1}\PY{p}{,}\PY{n}{Xa2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{loadtxt}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hw3\PYZus{}data\PYZus{}a.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{unpack}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{yb}\PY{p}{,} \PY{n}{Xb1}\PY{p}{,}\PY{n}{Xb2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{loadtxt}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hw3\PYZus{}data\PYZus{}b.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{unpack}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{n}{Xa1\PYZus{}m} \PY{o}{=} \PY{n}{Xa1}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{ya}\PY{o}{==}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+         \PY{n}{Xa2\PYZus{}m} \PY{o}{=} \PY{n}{Xa2}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{ya}\PY{o}{==}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+         \PY{n}{Xa1\PYZus{}p} \PY{o}{=} \PY{n}{Xa1}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{ya}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+         \PY{n}{Xa2\PYZus{}p} \PY{o}{=} \PY{n}{Xa2}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{ya}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+         
+         \PY{n}{Xb1\PYZus{}m} \PY{o}{=} \PY{n}{Xb1}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{yb}\PY{o}{==}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+         \PY{n}{Xb2\PYZus{}m} \PY{o}{=} \PY{n}{Xb2}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{yb}\PY{o}{==}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+         \PY{n}{Xb1\PYZus{}p} \PY{o}{=} \PY{n}{Xb1}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{yb}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+         \PY{n}{Xb2\PYZus{}p} \PY{o}{=} \PY{n}{Xb2}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{yb}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A\PYZhy{}gögn, Þríhyrningur: y=\PYZhy{}1, plús: y=1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Xa1\PYZus{}m}\PY{p}{,}\PY{n}{Xa2\PYZus{}m}\PY{p}{,}\PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZca{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Xa1\PYZus{}p}\PY{p}{,}\PY{n}{Xa2\PYZus{}p}\PY{p}{,}\PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{+}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B\PYZhy{}gögn, Þríhyrningur: y=\PYZhy{}1, plús: y=1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Xb1\PYZus{}m}\PY{p}{,}\PY{n}{Xb2\PYZus{}m}\PY{p}{,}\PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZca{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Xb1\PYZus{}p}\PY{p}{,}\PY{n}{Xb2\PYZus{}p}\PY{p}{,}\PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{+}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Við sjáum að gögnin eru ekki linearly separable fyrir A-gögnin en þegar
+kemur að B-gögnunum þá sjáum við að hægt er að teikna línu sem aðskilur
+þríhyrninga og plúsa. Þessi útfærsla af Logistic Regression úr
+lr\_debug.py hefur ekki regularization og því stefnir \(\theta\) í
+óendanlegt.
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  {[}15 points{]} For each of these possible modifications, state
+  whether or not it would lead to the provided training algorithm
+  converging on datasets such as B. Justify your answers.
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi}.}
+\item
+  Using a different constant learning rate.
+\item
+  Decreasing the learning rate over time (e.g. scaling the initial
+  learning rate by \(1/t^2\), where \(t\) is the number of gradient
+  descent iterations thus far).
+\item
+  Linear scaling of the input features.
+\item
+  Adding zero-mean normally distributed noise to the training data or
+  labels.
+\item
+  Adding a regularization term on the form \(||\theta||_2^2\) to the
+  likelihood function.
+\end{enumerate}
+
+    \textbf{(i)} Upphaflega gildið á learning rate er \(10\) sem er nokkuð
+hátt gildi. Vandamálið er þó ekki það að learning rate sé að gera það að
+verkum að við séum að 'overshoota' lágmarkið á fallinu. Það getum við
+ályktað vegna þess að fallið verkað á gagnasafnið A er jafn hratt að ná
+samleitni þó svo að learning rate er 10, 1 eða 0.00000001. Við ályktum
+því að breyting á constant learning rate hafi engin áhrif.
+
+    \textbf{(ii)} Þetta ætti að draga úr áhættu þess að overshoota gögnin en
+vandamál algorithmans á gagnasafn B er ekki það að lágmarkið finnist
+ekki vegna 'overshooting'. Við drögum þá ályktunina að þetta komi ekki
+að gagni. 
+
+    \textbf{(iii)} Það er satt að línuleg skölun á gögnunum lætur Gradient
+Descent keyra miklu hraðar. Gagnasafnið B er þó skalað og samt hegðar
+forritið sér undarlega.
+
+    \textbf{(iv)} Þetta gæti komið að gagni því það sem við viljum gera er
+að hliðra gögnunum á þann hátt að þau séu ekki lengur linearly
+seperatable.
+
+    \textbf{(v)} Þetta væri góð lausn á þessu vandamáli okkar. Þetta myndi
+koma í veg fyrir að \(\theta \rightarrow \infty\) og refsar fyrir of
+stór gildi á \(\theta\)
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

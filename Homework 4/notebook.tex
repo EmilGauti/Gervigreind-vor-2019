@@ -1,0 +1,1014 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{hw4}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{REI602M Machine Learning - Homework
+4}\label{rei602m-machine-learning---homework-4}
+
+\subsubsection{Due: Sunday 10.2.2019}\label{due-sunday-10.2.2019}
+
+\textbf{Objectives}: Support vector machines, feature selection.
+
+\textbf{Name}: Emil Gauti Friðriksson, \textbf{email: } egf3@hi.is,
+\textbf{collaborators:} (if any)
+
+Please provide your solutions by filling in the appropriate cells in
+this notebook, creating new cells as needed. Hand in your solution on
+Gradescope, taking care to locate the appropriate page numbers in the
+PDF document. Make sure that you are familiar with the course rules on
+collaboration (encouraged) and copying (very, very, bad).
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  {[}Stochastic gradient descent for SVM, 40 points{]}. In this problem
+  you are to implement a stochastic gradient descent algorithm for
+  training a linear SVM. The model is \(f_\theta(x)=\theta^T x\) (to
+  include an intercept term you can simply set \(x_0=1\) as before). The
+  algorithm minimizes the SVM objective function \[
+     J(\theta) = \frac{\lambda}{2}\theta^T \theta + \frac{1}{n} \sum_{i=1}^n \max(0, 1-y^{(i)}\theta^T x^{(i)}).
+  \] The hinge loss \(\max(0, 1-z)\) is not differentiable at \(z=1\)
+  and this results in a objective function which is not differentiable
+  everywhere, hence the gradient of \(J(\theta)\) is not defined
+  everywhere. To deal with this, the SGD algorithm uses the
+  \emph{sub-gradient} of \(J\) instead (see below). The algorithm starts
+  from \(\theta^{(0)}=0\) and performs a fixed number of iterations,
+  with step \(k\) as follows:
+\end{enumerate}
+
+Select \(i\) uniformly at random from \([1,n]\)
+
+\(\alpha^{(k)} = \frac{1}{\lambda k}\)
+
+if \(y^{(i)}~(\theta^{(k)})^T x^{(i)} < 1 ~\textrm{then}\)
+
+\(\quad \theta^{(k+1)} = \theta^{(k)} - \alpha^{(k)}(\lambda \theta^{(k)} - y^{(i)} x^{(i)})\)
+
+else
+
+\(\quad \theta^{(k+1)} = \theta^{(k)} - \alpha^{(k)} \lambda \theta^{(k)}\)
+
+where \(\theta^{(k)}\) denotes the parameter \emph{vector} in iteration
+\(k\) and \(\lambda>0\) is a regularization hyper-parameter. The step
+size \(\alpha^{(k)}\) decays over the course of iterations instead of
+being constant as we've seen in previous implementations of SGD.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  {[}20 points{]} Implement the SGD algorithm above and use it to
+  classify dataset \texttt{hw3\_data\_a} from homework 3 using
+  \(\lambda=1/100\). Report the model coefficients and training set
+  accuracy.
+\end{enumerate}
+
+\emph{Comments}:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  To sample uniformly at random from \([0,n-1]\) use
+  \texttt{np.random.randint}.
+\end{enumerate}
+
+2). A \emph{sub-gradient} is a generalization of the gradient for convex
+functions which are not necessarily differentiable. Such functions arise
+quite frequently in machine learning, e.g. when one is using the 1-norm
+for regularization. The sub-gradient of a function at a point is the
+slope of \emph{a} hyperplane that passes through the point and lies
+below the graph of the function. We will not cover sub-gradients in more
+detail in this course.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k}{def} \PY{n+nf}{svm\PYZus{}sgd}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n}{lambda\PYZus{}par}\PY{p}{,}\PY{n}{max\PYZus{}epochs}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} X ... Input variables (n x p matrix)}
+            \PY{c+c1}{\PYZsh{} y ... Labels (n vector), \PYZhy{}1 or 1}
+            \PY{c+c1}{\PYZsh{} lambda\PYZus{}par ... Regularization constant (non\PYZhy{}negative)}
+            \PY{c+c1}{\PYZsh{} max\PYZus{}epochs ... Maximum number of \PYZdq{}passes\PYZdq{} through the data set}
+        
+            \PY{k}{assert}\PY{p}{(}\PY{n}{lambda\PYZus{}par} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{)}
+            \PY{n}{n} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{p} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+            \PY{n}{max\PYZus{}iter} \PY{o}{=} \PY{n}{max\PYZus{}epochs}\PY{o}{*}\PY{n}{n}
+            \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{p}\PY{p}{)}
+            \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{max\PYZus{}iter}\PY{p}{)}\PY{p}{:}
+                \PY{n}{i} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+                \PY{n}{alpha} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{n}{lambda\PYZus{}par}\PY{o}{*}\PY{n}{k}\PY{p}{)}
+                \PY{k}{if} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{theta}\PY{o}{.}\PY{n}{T}\PY{n+nd}{@X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{l+m+mi}{1}\PY{p}{:}
+                    \PY{n}{theta} \PY{o}{=} \PY{n}{theta} \PY{o}{\PYZhy{}} \PY{n}{alpha}\PY{o}{*}\PY{p}{(}\PY{n}{lambda\PYZus{}par}\PY{o}{*}\PY{n}{theta}\PY{o}{\PYZhy{}}\PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{theta} \PY{o}{=} \PY{n}{theta} \PY{o}{\PYZhy{}} \PY{n}{alpha}\PY{o}{*}\PY{n}{lambda\PYZus{}par}\PY{o}{*}\PY{n}{theta}
+            \PY{k}{return} \PY{n}{theta}
+            
+            
+        
+        \PY{n}{y}\PY{p}{,}\PY{n}{X1}\PY{p}{,}\PY{n}{X2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{loadtxt}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hw3\PYZus{}data\PYZus{}a.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{unpack}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{c\PYZus{}}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X1}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{X1}\PY{p}{,}\PY{n}{X2}\PY{p}{]}
+        \PY{n}{theta} \PY{o}{=} \PY{n}{svm\PYZus{}sgd}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{theta}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}print(X)}
+        \PY{n}{X1\PYZus{}m} \PY{o}{=} \PY{n}{X1}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{y} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+        \PY{n}{X1\PYZus{}p} \PY{o}{=} \PY{n}{X1}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{y} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+        \PY{n}{X2\PYZus{}m} \PY{o}{=} \PY{n}{X2}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{y} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+        \PY{n}{X2\PYZus{}p} \PY{o}{=} \PY{n}{X2}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{y} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+        \PY{n}{sign} \PY{o}{=} \PY{n}{theta}\PY{n+nd}{@X}\PY{o}{.}\PY{n}{T}
+        \PY{n}{X\PYZus{}neg} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{sign}\PY{o}{\PYZlt{}}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}
+        \PY{n}{X\PYZus{}pos} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{sign}\PY{o}{\PYZgt{}}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}
+        \PY{n}{z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}
+        \PY{n}{f} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{theta}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{z}\PY{o}{\PYZhy{}}\PY{n}{theta}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{theta}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X1\PYZus{}m}\PY{p}{,}\PY{n}{X2\PYZus{}m}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZca{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X1\PYZus{}p}\PY{p}{,}\PY{n}{X2\PYZus{}p}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{+}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}X\PYZus{}2\PYZdl{} sem fall af \PYZdl{}X\PYZus{}1\PYZdl{}, +: y=+1, Þríhyrningar: y=\PYZhy{}1, Raunveruleg gildi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}X\PYZus{}1\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}X\PYZus{}2\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X\PYZus{}neg}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{X\PYZus{}neg}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}\PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZca{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X\PYZus{}pos}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{X\PYZus{}pos}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}\PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{+}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{z}\PY{p}{,}\PY{n}{f}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}X\PYZus{}2\PYZdl{} sem fall af \PYZdl{}X\PYZus{}1\PYZdl{}, +: y=+1, Þríhyrningar: y=\PYZhy{}1, Líkan(SVM)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}X\PYZus{}1\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}X\PYZus{}2\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[-2.8028028   3.04449458  2.4393433 ]
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_2_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\item
+  {[}20 points{]} Train a linear SVM classifier on a subset of the MNIST
+  dataset from homework 3 consisting of digits 5 and 8 only. Keep track
+  of the objective function value and training set error during the
+  course of iterations.
+\item
+  Plot the objective function values and training set error as a
+  function of iteration number. Consider using a log-scale for iteration
+  and/or objective values (see e.g. \texttt{matplotlib.pyplot.loglog}).
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi})}
+\setcounter{enumi}{1}
+\item
+  Evaluate classifier accuracy using the test set (digits 5 and 8 only)
+  using your classifier.
+\item
+  Compare the accuracy of your classifier with the SVM implementation in
+  \texttt{sklearn.svm.LinearSVC}.
+\end{enumerate}
+
+\emph{Comments}:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Computing the function values and training set error requires a pass
+  through all the training data. This is computationally expensive,
+  especially for large data sets, so you should compute these values
+  once every \(T\) iterations where \(T\) could e.g. be 100, 1000 or
+  \(n\).
+\item
+  To speed up computations use matrix and vector operations instead of
+  \emph{for}-loops where possible. For example, if the training set is
+  in matrix \(X\) you can classify all the examples in a single
+  matrix-vector multiplication, \(y_{pred}=X\theta\). This issue is
+  discussed in some detail in
+  http://cs229.stanford.edu/section/vec\_demo/Vectorization\_Section.pdf
+\item
+  You can use the following code to discard all but classes 5 and 8 with
+  \texttt{x\_train,\ y\_train\ =\ filter\_classes(x\_train,\ y\_train,\ 5,\ 8)}
+\end{enumerate}
+
+\texttt{python\ def\ filter\_classes(X,\ y,\ cls1,\ cls2):\ \ \ \ \ \#\ Reduces\ training\ set\ (X,y)\ so\ that\ it\ contains\ only\ labels\ cls1,\ cls2\ and\ then\ maps\ the\ labels\ to\ \{-1,1\}\ \ \ \ \ cond\ =\ np.logical\_or(y\ ==\ cls1,\ y\ ==\ cls2)\ \ \ \ \ \ X\_red\ =\ X{[}cond,:{]}\ \ \ \ \ y\_red\ =\ {[}-1\ if\ c==cls1\ else\ 1\ for\ c\ in\ y{[}cond{]}{]}\ \ \ \ \ return\ X\_red,\ y\_red}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Note that the \(\lambda\) parameter in the above SVM formulation is
+  related to the \(C\) parameter in the "standard" SVM formulation via
+  \(\lambda=1/(nC)\).
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{filter\PYZus{}classes}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{cls1}\PY{p}{,} \PY{n}{cls2}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} Reduces training set (X,y) so that it contains only labels cls1, cls2 and then maps the labels to \PYZob{}\PYZhy{}1,1\PYZcb{}}
+            \PY{n}{cond} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}or}\PY{p}{(}\PY{n}{y} \PY{o}{==} \PY{n}{cls1}\PY{p}{,} \PY{n}{y} \PY{o}{==} \PY{n}{cls2}\PY{p}{)} 
+            \PY{n}{X\PYZus{}red} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{cond}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+            \PY{n}{y\PYZus{}red} \PY{o}{=} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{k}{if} \PY{n}{c}\PY{o}{==}\PY{n}{cls1} \PY{k}{else} \PY{l+m+mi}{1} \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n}{y}\PY{p}{[}\PY{n}{cond}\PY{p}{]}\PY{p}{]}
+            \PY{k}{return} \PY{n}{X\PYZus{}red}\PY{p}{,} \PY{n}{y\PYZus{}red}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}Load data}
+        \PY{n}{data}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mnist.npz}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{X\PYZus{}train}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{y\PYZus{}train}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{X\PYZus{}val}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}val}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{y\PYZus{}val}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}val}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{X\PYZus{}test}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{y\PYZus{}test}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{}Reducing data}
+        \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{filter\PYZus{}classes}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}
+        \PY{n}{X\PYZus{}val}\PY{p}{,}\PY{n}{y\PYZus{}val} \PY{o}{=} \PY{n}{filter\PYZus{}classes}\PY{p}{(}\PY{n}{X\PYZus{}val}\PY{p}{,}\PY{n}{y\PYZus{}val}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}
+        \PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{filter\PYZus{}classes}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{rc}
+        \PY{k}{def} \PY{n+nf}{obj\PYZus{}func}\PY{p}{(}\PY{n}{theta}\PY{p}{,}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n}{lambda\PYZus{}par}\PY{p}{)}\PY{p}{:}
+            \PY{n}{J}\PY{o}{=}\PY{l+m+mi}{0}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{element} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{n}{element} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{theta}\PY{o}{.}\PY{n}{T}\PY{n+nd}{@X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+                \PY{k}{if} \PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{element}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n}{J} \PY{o}{=} \PY{n}{J} \PY{o}{+} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{element}
+                        
+            \PY{n}{J} \PY{o}{=} \PY{n}{lambda\PYZus{}par}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{theta}\PY{o}{.}\PY{n}{T}\PY{n+nd}{@theta} \PY{o}{+} \PY{l+m+mi}{1}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{o}{*}\PY{n}{J}     
+            \PY{k}{return} \PY{n}{J}
+        
+        \PY{k}{def} \PY{n+nf}{svm\PYZus{}sgd2}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n}{lambda\PYZus{}par}\PY{p}{,}\PY{n}{T}\PY{p}{,}\PY{n}{max\PYZus{}epochs}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} X ... Input variables (n x p matrix)}
+            \PY{c+c1}{\PYZsh{} y ... Labels (n vector), \PYZhy{}1 or 1}
+            \PY{c+c1}{\PYZsh{} lambda\PYZus{}par ... Regularization constant (non\PYZhy{}negative)}
+            \PY{c+c1}{\PYZsh{} max\PYZus{}epochs ... Maximum number of \PYZdq{}passes\PYZdq{} through the data set}
+        
+            \PY{k}{assert}\PY{p}{(}\PY{n}{lambda\PYZus{}par} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{)}
+            \PY{n}{n} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{p} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+            \PY{n}{max\PYZus{}iter} \PY{o}{=} \PY{n}{max\PYZus{}epochs}\PY{o}{*}\PY{n}{n}
+            \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{p}\PY{p}{)}
+            \PY{n}{J} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+            \PY{n}{no\PYZus{}k} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)} 
+            \PY{n}{errors} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+            \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{max\PYZus{}iter}\PY{p}{)}\PY{p}{:}
+                \PY{n}{i} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+                \PY{n}{alpha} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{n}{lambda\PYZus{}par}\PY{o}{*}\PY{n}{k}\PY{p}{)}
+                \PY{k}{if} \PY{n}{k}\PY{o}{\PYZpc{}}\PY{k}{T} == 0:
+                    \PY{n}{J} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{J}\PY{p}{,}\PY{n}{obj\PYZus{}func}\PY{p}{(}\PY{n}{theta}\PY{p}{,}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n}{lambda\PYZus{}par}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{no\PYZus{}k} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{no\PYZus{}k}\PY{p}{,}\PY{n}{k}\PY{p}{)}
+                    \PY{n}{ypred\PYZus{}train} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sign}\PY{p}{(}\PY{n}{theta}\PY{n+nd}{@X\PYZus{}train}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+                    \PY{n}{errors} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{errors}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{ypred\PYZus{}train} \PY{o}{!=} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+                \PY{k}{if} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{theta}\PY{o}{.}\PY{n}{T}\PY{n+nd}{@X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{l+m+mi}{1}\PY{p}{:}
+                    \PY{n}{theta} \PY{o}{=} \PY{n}{theta} \PY{o}{\PYZhy{}} \PY{n}{alpha}\PY{o}{*}\PY{p}{(}\PY{n}{lambda\PYZus{}par}\PY{o}{*}\PY{n}{theta}\PY{o}{\PYZhy{}}\PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{theta} \PY{o}{=} \PY{n}{theta} \PY{o}{\PYZhy{}} \PY{n}{alpha}\PY{o}{*}\PY{n}{lambda\PYZus{}par}\PY{o}{*}\PY{n}{theta}
+            \PY{k}{return} \PY{n}{theta}\PY{p}{,} \PY{n}{J}\PY{p}{,} \PY{n}{no\PYZus{}k}\PY{p}{,} \PY{n}{errors}
+        
+        \PY{n}{T} \PY{o}{=} \PY{l+m+mi}{1000}
+        \PY{n}{lambda\PYZus{}par} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{100}
+        \PY{n}{max\PYZus{}epochs} \PY{o}{=} \PY{l+m+mi}{10}
+        \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{)}
+        \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{)}
+        \PY{n}{theta}\PY{p}{,} \PY{n}{J}\PY{p}{,} \PY{n}{no\PYZus{}k}\PY{p}{,} \PY{n}{errors} \PY{o}{=} \PY{n}{svm\PYZus{}sgd2}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{,}\PY{n}{lambda\PYZus{}par}\PY{p}{,} \PY{n}{T}\PY{p}{,}\PY{n}{max\PYZus{}epochs}\PY{p}{)}
+        
+        \PY{n}{sign} \PY{o}{=} \PY{n}{theta}\PY{n+nd}{@X\PYZus{}train}\PY{o}{.}\PY{n}{T}
+        \PY{n}{X\PYZus{}train\PYZus{}neg} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{sign}\PY{o}{\PYZlt{}}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]} \PY{c+c1}{\PYZsh{} skv. módelinu}
+        \PY{n}{X\PYZus{}train\PYZus{}pos} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{sign}\PY{o}{\PYZgt{}}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]} \PY{c+c1}{\PYZsh{} skv. módelinu}
+        \PY{n}{X\PYZus{}train\PYZus{}m} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{y\PYZus{}train} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+        \PY{n}{X\PYZus{}train\PYZus{}p} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{y\PYZus{}train} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+        \PY{n}{ypred\PYZus{}train} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sign}\PY{p}{(}\PY{n}{sign}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train Error:    }\PY{l+s+si}{\PYZob{}0:1.4f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{ypred\PYZus{}train} \PY{o}{!=} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{rc}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{usetex}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{no\PYZus{}k}\PY{p}{,}\PY{n}{J}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Objective function \PYZdl{}J(}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{theta)\PYZdl{} as a function of iteration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}J(}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{theta)\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{loglog}\PY{p}{(}\PY{n}{no\PYZus{}k}\PY{p}{,}\PY{n}{J}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Objective function \PYZdl{}J(}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{theta)\PYZdl{} as a function of iteration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}J(}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{theta)\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{rc}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{usetex}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{no\PYZus{}k}\PY{p}{,}\PY{n}{errors}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train error \PYZdl{}E\PYZus{}}\PY{l+s+si}{\PYZob{}train\PYZcb{}}\PY{l+s+s1}{\PYZdl{} as a function of iteration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}E\PYZus{}}\PY{l+s+si}{\PYZob{}train\PYZcb{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{loglog}\PY{p}{(}\PY{n}{no\PYZus{}k}\PY{p}{,}\PY{n}{errors}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train error \PYZdl{}E\PYZus{}}\PY{l+s+si}{\PYZob{}train\PYZcb{}}\PY{l+s+s1}{\PYZdl{} as a function of iteration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}E\PYZus{}}\PY{l+s+si}{\PYZob{}train\PYZcb{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Train Error:    0.0416
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} Text(0.5,0,'k')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_6_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_6_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}ii) Evaluate classifier accuracy using the test set }
+        \PY{c+c1}{\PYZsh{}(digits 5 and 8 only) using your classifier.}
+        
+        \PY{n}{ypred\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sign}\PY{p}{(}\PY{n}{theta}\PY{n+nd}{@X\PYZus{}test}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test Error:    }\PY{l+s+si}{\PYZob{}0:1.4f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{ypred\PYZus{}test} \PY{o}{!=} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test Error:    0.0445
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{}iii) Compare the accuracy of your classifier }
+        \PY{c+c1}{\PYZsh{}with the SVM implementation in sklearn.svm.LinearSVC.}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{LinearSVC}
+        \PY{n}{clf} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{p}{)}
+        \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train accuracy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n+nb}{round}\PY{p}{(}\PY{n}{clf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train error:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n+nb}{round}\PY{p}{(}\PY{n}{clf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test accuracy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n+nb}{round}\PY{p}{(}\PY{n}{clf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test error:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n+nb}{round}\PY{p}{(}\PY{n}{clf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Train accuracy: 0.9772
+Train error: 0.022800000000000042
+Test accuracy: 0.9582
+Test error: 0.04179999999999995
+
+    \end{Verbatim}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  {[}Spam filtering, 30 points - This is based on a problem from Andrew
+  Ng's machine learning course at Stanford{]} In recent years, spam on
+  electronic newsgroups has been an increasing problem. Here, you will
+  build a classifier to distinguish between "real" newsgroup messages,
+  and spam messages. For this experiment, a set of spam emails and a set
+  of genuine newsgroup messages have been obtained. Using only the
+  subject line and body of each message, we'll learn to distinguish
+  between the spam and non-spam. All the files for the problem are in
+  the file \texttt{email\_spam.zip}. In order to get the text emails
+  into a form usable by a off-the shelf classifier, some preprocessing
+  on the messages has already been performed. You can look at two sample
+  spam emails in the files \texttt{spam\_sample\_original}, and their
+  preprocessed forms in the files \texttt{spam\_sample\_preprocessed*}.
+  The first line in the preprocessed format is just the label and is not
+  part of the message. The preprocessing ensures that only the message
+  body and subject remain in the dataset; email addresses (EMAILADDR),
+  web addresses (HTTPADDR), currency (DOLLAR) and numbers (NUMBER) were
+  also replaced by the special tokens to allow them to be considered
+  properly in the classification process. (In this problem, we'll going
+  to call the features "tokens" rather than "words," since some of the
+  features will correspond to special values like EMAILADDR. You don't
+  have to worry about the distinction.) The files
+  \texttt{news\_sample\ original} and
+  \texttt{news\_sample\_preprocessed} also give an example of a non-spam
+  mail.
+\end{enumerate}
+
+The work to extract feature vectors (i.e. classifier inputs) out of the
+documents has also been done for you, so you can just load in the design
+matrices (called document-word matrices in text classification)
+containing all the data. In a document-word matrix, the \(i\)-th row
+represents the \(i\)-th document/email, and the \(j\)-th column
+represents the \(j\)-th distinct token. Thus, the \((i,j)\)-entry of
+this matrix represents the number of occurrences of the \(j\)-th token
+in the \(i\)-th document.
+
+For this problem, we've chosen as our set of tokens considered (that is,
+as our vocabulary) only the medium frequency tokens. The intuition is
+that tokens that occur too often or too rarely do not have much
+classification value. (Examples tokens that occur very often are words
+like "the", "and", and "of", which occur in so many emails and are
+sufficiently content-free that they aren't worth modeling.) Also, words
+were stemmed using a standard stemming algorithm; basically, this means
+that ``price,'' ``prices'' and ``priced'' have all been replaced with
+``price,'' so that they can be treated as the same word. For a list of
+the tokens used, see the variable file \texttt{tokenlist}. Since the
+document-word matrix is extremely sparse (has lots of zero entries), we
+have stored it in our own efficient format to save space. You don't have
+to worry about this format. The file \texttt{read\_spam\_data.py}
+provides the function \texttt{read\_matrix} to read in the document-word
+matrix and labels.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  {[}15 points{]} Train a linear SVM on this dataset using the
+  implementation in \texttt{sklearn.svm.LinearSVC} and \(C=0.1\).
+  Evaluate the accuracy on the test set for training sets of size 50,
+  100, 200, 400, 800 and 1400 and for the full test set as well.
+\end{enumerate}
+
+\emph{Comment}: To read the training and test data and the list of
+tokens behind the features use
+\texttt{python\ \ \ \ \ trainMatrix,\ tokenlist,\ trainCategory\ =\ readMatrix(\textquotesingle{}MATRIX.TRAIN\textquotesingle{})\ \ \ \ \ testMatrix,\ tokenlist,\ testCategory\ =\ readMatrix(\textquotesingle{}MATRIX.TEST\textquotesingle{})}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}140}]:} \PY{k+kn}{import} \PY{n+nn}{read\PYZus{}spam\PYZus{}data} \PY{k}{as} \PY{n+nn}{rsd}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{LinearSVC}
+          \PY{n}{trainMatrix}\PY{p}{,} \PY{n}{tokenlist}\PY{p}{,} \PY{n}{trainCategory} \PY{o}{=} \PY{n}{rsd}\PY{o}{.}\PY{n}{read\PYZus{}matrix}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MATRIX.TRAIN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{testMatrix}\PY{p}{,} \PY{n}{tokenlist}\PY{p}{,} \PY{n}{testCategory} \PY{o}{=} \PY{n}{rsd}\PY{o}{.}\PY{n}{read\PYZus{}matrix}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MATRIX.TEST}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{trainMatrix50}\PY{p}{,} \PY{n}{tokenlist50}\PY{p}{,} \PY{n}{trainCategory50} \PY{o}{=} \PY{n}{rsd}\PY{o}{.}\PY{n}{read\PYZus{}matrix}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MATRIX.TRAIN.50}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{trainMatrix100}\PY{p}{,} \PY{n}{tokenlist100}\PY{p}{,} \PY{n}{trainCategory100} \PY{o}{=} \PY{n}{rsd}\PY{o}{.}\PY{n}{read\PYZus{}matrix}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MATRIX.TRAIN.100}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{trainMatrix200}\PY{p}{,} \PY{n}{tokenlist200}\PY{p}{,} \PY{n}{trainCategory200} \PY{o}{=} \PY{n}{rsd}\PY{o}{.}\PY{n}{read\PYZus{}matrix}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MATRIX.TRAIN.200}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{trainMatrix400}\PY{p}{,} \PY{n}{tokenlist400}\PY{p}{,} \PY{n}{trainCategory400} \PY{o}{=} \PY{n}{rsd}\PY{o}{.}\PY{n}{read\PYZus{}matrix}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MATRIX.TRAIN.400}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{trainMatrix800}\PY{p}{,} \PY{n}{tokenlist800}\PY{p}{,} \PY{n}{trainCategory800} \PY{o}{=} \PY{n}{rsd}\PY{o}{.}\PY{n}{read\PYZus{}matrix}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MATRIX.TRAIN.800}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{trainMatrix1400}\PY{p}{,} \PY{n}{tokenlist1400}\PY{p}{,} \PY{n}{trainCategory1400} \PY{o}{=} \PY{n}{rsd}\PY{o}{.}\PY{n}{read\PYZus{}matrix}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MATRIX.TRAIN.1400}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          
+          \PY{n}{lsvm} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)} 
+          \PY{n}{lsvm}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{trainMatrix}\PY{p}{,}\PY{n}{trainCategory}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{lsvm}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{testMatrix}\PY{p}{,}\PY{n}{testCategory}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{lsvm50} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)} 
+          \PY{n}{lsvm50}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{trainMatrix50}\PY{p}{,}\PY{n}{trainCategory50}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{50:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{lsvm50}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{testMatrix}\PY{p}{,}\PY{n}{testCategory}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{lsvm100} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)} 
+          \PY{n}{lsvm100}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{trainMatrix100}\PY{p}{,}\PY{n}{trainCategory100}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{100:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{lsvm100}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{testMatrix}\PY{p}{,}\PY{n}{testCategory}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{lsvm200} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)} 
+          \PY{n}{lsvm200}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{trainMatrix200}\PY{p}{,}\PY{n}{trainCategory200}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{200:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{lsvm200}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{testMatrix}\PY{p}{,}\PY{n}{testCategory}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{lsvm400} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)} 
+          \PY{n}{lsvm400}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{trainMatrix400}\PY{p}{,}\PY{n}{trainCategory400}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{400:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{lsvm400}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{testMatrix}\PY{p}{,}\PY{n}{testCategory}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{lsvm800} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)} 
+          \PY{n}{lsvm800}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{trainMatrix800}\PY{p}{,}\PY{n}{trainCategory800}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{800:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{lsvm800}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{testMatrix}\PY{p}{,}\PY{n}{testCategory}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{lsvm1400} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)} 
+          \PY{n}{lsvm1400}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{trainMatrix1400}\PY{p}{,}\PY{n}{trainCategory1400}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1400:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{lsvm1400}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{testMatrix}\PY{p}{,}\PY{n}{testCategory}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.9725
+50: 0.92125
+100: 0.94625
+200: 0.95625
+400: 0.95625
+800: 0.97
+1400: 0.965
+
+    \end{Verbatim}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  {[}15 points{]} Classifier accuracy is in general strongly dependent
+  on the selection of inputs to the classifier. The GIGO principle
+  (garbage in, garbage out) usually applies. While some classifiers are
+  quite tolerant towards noisy/irrelevant inputs (e.g. tree-based
+  classifiers), the performance of other classifiers can degrade quickly
+  (e.g. nonlinear SVMs). In the \emph{feature selection} problem the
+  task is to identify which features are most relevant for a given
+  classification problem. By performing a careful selection of features,
+  the performance of a classifier can often be improved significantly.
+  Alternatively, it can be interesting to identify a minimal set of
+  features for acceptable performance (e.g. due to high costs of
+  collecting/measuring the full feature set).
+\end{enumerate}
+
+A simple feature selection strategy considers the weights in a linear
+SVM after training has been performed. The larger \(|\theta_k|\) is, the
+larger the role of the corresponding feature in the decision function.
+The strategy is therefore to rank the features according to
+\(|\theta_k|\).
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi})}
+\item
+  Train a linear SVM on the full spam data set and list the 10 tokens
+  most important tokens in the above sense.
+\item
+  Retrain a Linear SVM using only the most important 20 features/tokens.
+  How does the accuracy compare with the full classifier?
+\end{enumerate}
+
+\emph{Comment}: The weights are stored in the \texttt{coef\_} attribute
+in the LinearSVC class. The above feature selection method is discussed
+in http://proceedings.mlr.press/v3/chang08a/chang08a.pdf
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}148}]:} \PY{c+c1}{\PYZsh{}i)}
+          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{n}{theta} \PY{o}{=} \PY{n}{lsvm}\PY{o}{.}\PY{n}{coef\PYZus{}}
+          \PY{n}{abstheta} \PY{o}{=} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{theta}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}10 stærstu theta:}
+          \PY{n}{index10} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{abstheta}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{:}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+          \PY{n}{max10\PYZus{}theta} \PY{o}{=} \PY{n}{theta}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{index10}\PY{p}{]}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{max10\PYZus{}theta}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ 0.41427361  0.41171377 -0.36579293  0.27131702 -0.25575369  0.24923277
+  0.23578956  0.23437205  0.2304037   0.22636743]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}149}]:} \PY{c+c1}{\PYZsh{}ii)}
+          \PY{n}{index20} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{abstheta}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{20}\PY{p}{:}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+          \PY{n}{max20\PYZus{}theta} \PY{o}{=} \PY{n}{theta}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{index20}\PY{p}{]}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{max20\PYZus{}theta}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ 0.41427361  0.41171377 -0.36579293  0.27131702 -0.25575369  0.24923277
+  0.23578956  0.23437205  0.2304037   0.22636743  0.22395683 -0.20556691
+  0.20125095 -0.19291662 -0.18271114 -0.1823531   0.18159919  0.17945918
+ -0.1778779  -0.17268974]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}150}]:} \PY{n}{n} \PY{o}{=} \PY{n}{trainMatrix}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+          \PY{n}{p} \PY{o}{=} \PY{n}{trainMatrix}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+          \PY{c+c1}{\PYZsh{}Vil núlla alla dálka úr trainmatrix sem eru ekki einn af þessum 20}
+          
+          \PY{n}{trainMatrix2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{n}{p}\PY{p}{)}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+              \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{trainMatrix2}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{index20}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{trainMatrix}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{index20}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{]}
+          
+          \PY{n}{lsvmDonk} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}
+          \PY{n}{lsvmDonk}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{trainMatrix2}\PY{p}{,}\PY{n}{trainCategory}\PY{p}{)}
+          
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train accuracy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n+nb}{round}\PY{p}{(}\PY{n}{lsvmDonk}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{trainMatrix}\PY{p}{,}\PY{n}{trainCategory}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test accuracy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{lsvmDonk}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{testMatrix}\PY{p}{,}\PY{n}{testCategory}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Train accuracy: 0.9506
+Test accuracy: 0.9525
+
+    \end{Verbatim}
+
+    Nákvæmnin(Test accuracy) sem fæst þegar allir Tokens eru notaðir er skv.
+(a) lið: \(A^{P=all}_{test} = 0.9725\) en þegar einunigs 20 Tokens eru
+notaðir fæst \(A^{P=20}_{test} = 0.9525\). Þannig að það fæst meiri
+nákvæmni ef allir Tokens eru notaðir en þó svo að einungis 20 séu
+notaðir fæst merkilega mikil nákvæmni.
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  {[}SVM classifier with RBF kernel, 30 points{]} Train an SVM with RBF
+  kernel on the MNIST data set from last week. Use the validation set to
+  select optimal values of \(C\) and the RBF parameter \(\gamma\) by
+  performing a "grid search" on the validation set. This is simply a
+  double for-loop where the outer loop iterates over one parameter and
+  the inner loop over the other. For each \((C,\gamma)\) pair train an
+  RBF SVM on a random subset of the training data (e.g. with 5000
+  samples, otherwise the training time may become prohibitively long)
+  and evaluate accuracy on the validation set. Use the the following
+  values for \(C\), {[}1, 10, 100{]} and {[}1/10, 1/100, 1/1000{]} for
+  \(\gamma\). Use the best \((C,\gamma)\) pair to train a final
+  classifier, using as much of the training data as you can and report
+  the test set error. How does the performance compare to last week's
+  \(k\)-NN and logistic regression classifiers?
+\end{enumerate}
+
+\emph{Comment}: Use the \texttt{sklearn.svm.SVC} implementation in
+scikit-learn. The training is time consuming since multiclass problems
+are handled in a one-against-one scheme which results in (10)(9)/2=45
+binary classifiers that need to be trained. Since we have a separate
+validation set we avoid performing \(k\)-fold cross-validation on all 45
+classifiers, with \(k\) typically 5 or 10 this could increase the
+training time 10-fold.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}180}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{SVC}
+          \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{rc}
+          \PY{c+c1}{\PYZsh{}Load data}
+          \PY{n}{data}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mnist.npz}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{X\PYZus{}test}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{y\PYZus{}test}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          
+          \PY{k}{def} \PY{n+nf}{rand\PYZus{}data}\PY{p}{(}\PY{n}{data}\PY{p}{,}\PY{n}{n}\PY{p}{,}\PY{n}{seed}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{} Tekur inn data og skilar X\PYZus{}train,y\PYZus{}train }
+              \PY{c+c1}{\PYZsh{} af lengd n sem er random subset af data}
+              \PY{n}{nn} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+              \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{n}{seed}\PY{p}{)}
+              \PY{n}{rnd}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n}{nn}\PY{p}{)}\PY{p}{,} \PY{n}{n}\PY{p}{,} \PY{n}{replace}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+              \PY{n}{X\PYZus{}train}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{rnd}\PY{p}{]}
+              \PY{n}{y\PYZus{}train}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{rnd}\PY{p}{]}
+              \PY{k}{return} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}
+          
+          \PY{n}{C} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{]}\PY{p}{)}
+          \PY{n}{gamma} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{1000}\PY{p}{]}\PY{p}{)}
+          \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{5000} \PY{c+c1}{\PYZsh{} magn af gögnum til að þjálfa á}
+          
+          \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n}{C}\PY{p}{:}
+              \PY{k}{for} \PY{n}{g} \PY{o+ow}{in} \PY{n}{gamma}\PY{p}{:}
+                  \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{rand\PYZus{}data}\PY{p}{(}\PY{n}{data}\PY{p}{,}\PY{n}{n}\PY{p}{,}\PY{n+nb}{int}\PY{p}{(}\PY{l+m+mi}{1000}\PY{o}{*}\PY{p}{(}\PY{n}{g}\PY{o}{+}\PY{n}{c}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{rbf} \PY{o}{=} \PY{n}{SVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{n}{c}\PY{p}{,}\PY{n}{gamma}\PY{o}{=}\PY{n}{g}\PY{p}{,}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rbf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                  \PY{n}{rbf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{c}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gamma =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{g}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test accuracy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{rbf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+c= 1 gamma= 0.1 0.8696
+c= 1 gamma= 0.01 0.9507
+c= 1 gamma= 0.001 0.9071
+c= 10 gamma= 0.1 0.844
+c= 10 gamma= 0.01 0.9578
+c= 10 gamma= 0.001 0.9331
+c= 100 gamma= 0.1 0.8504
+c= 100 gamma= 0.01 0.9596
+c= 100 gamma= 0.001 0.9339
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}181}]:} \PY{c+c1}{\PYZsh{}Hér ætlum við að þjálfa rbf með bestu gildum á C og gamma:}
+          \PY{c+c1}{\PYZsh{} bestu gildin eru C=100 og gamma=0.01 skv. liðnum á undan}
+          \PY{n}{data}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mnist.npz}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{X\PYZus{}test}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{y\PYZus{}test}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{X\PYZus{}train}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{y\PYZus{}train}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          
+          \PY{n}{C} \PY{o}{=} \PY{l+m+mi}{100}
+          \PY{n}{gamma} \PY{o}{=} \PY{l+m+mf}{0.01}
+          \PY{n}{rbf} \PY{o}{=} \PY{n}{SVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{n}{C}\PY{p}{,}\PY{n}{gamma}\PY{o}{=}\PY{n}{gamma}\PY{p}{,}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rbf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{rbf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+          \PY{n}{testScore}\PY{o}{=} \PY{n}{rbf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}
+          \PY{n}{trainScore} \PY{o}{=} \PY{n}{rbf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}185}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test score:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{testScore}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train score:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{trainScore}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test score: 0.983
+Train score: 1.0
+
+    \end{Verbatim}
+
+    Test score(RBF): \(0.983\)
+
+Train score(RBF): \(1.000\)
+
+Við erum að fá mikla nákvæmni hér líkt og með KNN. Keyrslutíminn er
+svipaður á RBF og KNN en skilar a.m.k. jafn góðum niðurstöðum eða betri,
+gefið að þú veljir rétta parametra \(C\) og \(\gamma\).
+
+Við fáum töluvert meiri nákvæmni hér heldur en með logical regression en
+keyrslutíminn er einnig mikið lengri.
+
+Ef ég ætti að velja hvaða módel ég myndi nota með þessum gögnum þá væri
+það þetta(RBF).
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

@@ -992,13 +992,19 @@ C = 100 gamma = 0.001 Test accuracy: 0.9315
     \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{}Hér ætlum við að þjálfa rbf með bestu gildum á C og gamma:}
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{}Hér ætlum við að þjálfa rbf með bestu gildum á C og gamma:}
          \PY{c+c1}{\PYZsh{} bestu gildin eru C=100 og gamma=0.01 skv. liðnum á undan}
          \PY{n}{data}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mnist.npz}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
          \PY{n}{X\PYZus{}test}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
          \PY{n}{y\PYZus{}test}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
          \PY{n}{X\PYZus{}train}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
          \PY{n}{y\PYZus{}train}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{X\PYZus{}val}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}val}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{y\PYZus{}val}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}val}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{} append the validation set to the training set}
+         \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{r\PYZus{}}\PY{p}{[}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}val}\PY{p}{]}
+         \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{r\PYZus{}}\PY{p}{[}\PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}val}\PY{p}{]}
+         
          
          \PY{n}{C} \PY{o}{=} \PY{l+m+mi}{100}
          \PY{n}{gamma} \PY{o}{=} \PY{l+m+mf}{0.01}
@@ -1010,13 +1016,13 @@ C = 100 gamma = 0.001 Test accuracy: 0.9315
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}28}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test score:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{testScore}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test score:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{testScore}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train score:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{trainScore}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-Test score: 0.983
+Test score: 0.9824
 Train score: 1.0
 
     \end{Verbatim}

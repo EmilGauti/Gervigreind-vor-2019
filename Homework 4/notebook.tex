@@ -748,7 +748,7 @@ tokens behind the features use
 \texttt{python\ \ \ \ \ trainMatrix,\ tokenlist,\ trainCategory\ =\ readMatrix(\textquotesingle{}MATRIX.TRAIN\textquotesingle{})\ \ \ \ \ testMatrix,\ tokenlist,\ testCategory\ =\ readMatrix(\textquotesingle{}MATRIX.TEST\textquotesingle{})}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}22}]:} \PY{k+kn}{import} \PY{n+nn}{read\PYZus{}spam\PYZus{}data} \PY{k}{as} \PY{n+nn}{rsd}
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k+kn}{import} \PY{n+nn}{read\PYZus{}spam\PYZus{}data} \PY{k}{as} \PY{n+nn}{rsd}
          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{LinearSVC}
          \PY{n}{trainMatrix}\PY{p}{,} \PY{n}{tokenlist}\PY{p}{,} \PY{n}{trainCategory} \PY{o}{=} \PY{n}{rsd}\PY{o}{.}\PY{n}{read\PYZus{}matrix}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MATRIX.TRAIN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
          \PY{n}{testMatrix}\PY{p}{,} \PY{n}{tokenlist}\PY{p}{,} \PY{n}{testCategory} \PY{o}{=} \PY{n}{rsd}\PY{o}{.}\PY{n}{read\PYZus{}matrix}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MATRIX.TEST}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
@@ -802,14 +802,6 @@ tokens behind the features use
 
     \end{Verbatim}
 
-    \begin{Verbatim}[commandchars=\\\{\}]
-/home/emil/anaconda3/lib/python3.7/site-packages/sklearn/svm/base.py:922: ConvergenceWarning: Liblinear failed to converge, increase the number of iterations.
-  "the number of iterations.", ConvergenceWarning)
-/home/emil/anaconda3/lib/python3.7/site-packages/sklearn/svm/base.py:922: ConvergenceWarning: Liblinear failed to converge, increase the number of iterations.
-  "the number of iterations.", ConvergenceWarning)
-
-    \end{Verbatim}
-
     \begin{enumerate}
 \def\labelenumi{\alph{enumi})}
 \setcounter{enumi}{1}
@@ -850,7 +842,7 @@ in the LinearSVC class. The above feature selection method is discussed
 in http://proceedings.mlr.press/v3/chang08a/chang08a.pdf
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{}i)}
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{}i)}
          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
          \PY{n}{theta} \PY{o}{=} \PY{n}{lsvm}\PY{o}{.}\PY{n}{coef\PYZus{}}
          \PY{n}{abstheta} \PY{o}{=} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{theta}\PY{p}{)}
@@ -858,12 +850,24 @@ in http://proceedings.mlr.press/v3/chang08a/chang08a.pdf
          \PY{n}{index10} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{abstheta}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{:}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
          \PY{n}{max10\PYZus{}theta} \PY{o}{=} \PY{n}{theta}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{index10}\PY{p}{]}
          \PY{n+nb}{print}\PY{p}{(}\PY{n}{max10\PYZus{}theta}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{index10}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{tokenlist}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
 \end{Verbatim}
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-[ 0.41426882  0.41171575 -0.36580629  0.27132645 -0.25565405  0.24922487
-  0.23579983  0.23434958  0.23042017  0.22636038]
+[ 0.41426863  0.41171584 -0.36580667  0.27132647 -0.25565499  0.24922445
+  0.2357998   0.23434982  0.23041976  0.22636052]
+click
+httpaddr
+write
+com
+sale
+mit
+brain
+futur
+free
+www
 
     \end{Verbatim}
 
@@ -944,7 +948,7 @@ classifiers, with \(k\) typically 5 or 10 this could increase the
 training time 10-fold.
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}26}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{SVC}
+{\color{incolor}In [{\color{incolor}23}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{SVC}
          \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{rc}
          \PY{c+c1}{\PYZsh{}Load data}
          \PY{n}{data}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mnist.npz}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
@@ -964,10 +968,10 @@ training time 10-fold.
          \PY{n}{C} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{]}\PY{p}{)}
          \PY{n}{gamma} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{1000}\PY{p}{]}\PY{p}{)}
          \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{5000} \PY{c+c1}{\PYZsh{} magn af gögnum til að þjálfa á}
+         \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{rand\PYZus{}data}\PY{p}{(}\PY{n}{data}\PY{p}{,}\PY{n}{n}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
          
          \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n}{C}\PY{p}{:}
              \PY{k}{for} \PY{n}{g} \PY{o+ow}{in} \PY{n}{gamma}\PY{p}{:}
-                 \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{rand\PYZus{}data}\PY{p}{(}\PY{n}{data}\PY{p}{,}\PY{n}{n}\PY{p}{,}\PY{n+nb}{int}\PY{p}{(}\PY{l+m+mi}{1000}\PY{o}{*}\PY{p}{(}\PY{n}{g}\PY{o}{+}\PY{n}{c}\PY{p}{)}\PY{p}{)}\PY{p}{)}
                  \PY{n}{rbf} \PY{o}{=} \PY{n}{SVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{n}{c}\PY{p}{,}\PY{n}{gamma}\PY{o}{=}\PY{n}{g}\PY{p}{,}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rbf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
                  \PY{n}{rbf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
                  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{c}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gamma =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{g}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test accuracy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{rbf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
@@ -975,15 +979,15 @@ training time 10-fold.
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-C = 1 gamma = 0.1 Test accuracy: 0.8696
-C = 1 gamma = 0.01 Test accuracy: 0.9507
-C = 1 gamma = 0.001 Test accuracy: 0.9071
-C = 10 gamma = 0.1 Test accuracy: 0.844
-C = 10 gamma = 0.01 Test accuracy: 0.9578
-C = 10 gamma = 0.001 Test accuracy: 0.9331
-C = 100 gamma = 0.1 Test accuracy: 0.8504
-C = 100 gamma = 0.01 Test accuracy: 0.9596
-C = 100 gamma = 0.001 Test accuracy: 0.9339
+C = 1 gamma = 0.1 Test accuracy: 0.8878
+C = 1 gamma = 0.01 Test accuracy: 0.9493
+C = 1 gamma = 0.001 Test accuracy: 0.9068
+C = 10 gamma = 0.1 Test accuracy: 0.8923
+C = 10 gamma = 0.01 Test accuracy: 0.9571
+C = 10 gamma = 0.001 Test accuracy: 0.9298
+C = 100 gamma = 0.1 Test accuracy: 0.8923
+C = 100 gamma = 0.01 Test accuracy: 0.9575
+C = 100 gamma = 0.001 Test accuracy: 0.9315
 
     \end{Verbatim}
 

@@ -361,7 +361,7 @@ below the graph of the function. We will not cover sub-gradients in more
 detail in this course.
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
         \PY{k}{def} \PY{n+nf}{svm\PYZus{}sgd}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n}{lambda\PYZus{}par}\PY{p}{,}\PY{n}{max\PYZus{}epochs}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
             \PY{c+c1}{\PYZsh{} X ... Input variables (n x p matrix)}
@@ -394,9 +394,9 @@ detail in this course.
         \PY{n}{X1\PYZus{}p} \PY{o}{=} \PY{n}{X1}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{y} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
         \PY{n}{X2\PYZus{}m} \PY{o}{=} \PY{n}{X2}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{y} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
         \PY{n}{X2\PYZus{}p} \PY{o}{=} \PY{n}{X2}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{y} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
-        \PY{n}{sign} \PY{o}{=} \PY{n}{theta}\PY{n+nd}{@X}\PY{o}{.}\PY{n}{T}
-        \PY{n}{X\PYZus{}neg} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{sign}\PY{o}{\PYZlt{}}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}
-        \PY{n}{X\PYZus{}pos} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{sign}\PY{o}{\PYZgt{}}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}
+        \PY{n}{ypred} \PY{o}{=} \PY{n}{theta}\PY{n+nd}{@X}\PY{o}{.}\PY{n}{T}
+        \PY{n}{X\PYZus{}neg} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{ypred}\PY{o}{\PYZlt{}}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}
+        \PY{n}{X\PYZus{}pos} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{ypred}\PY{o}{\PYZgt{}}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}
         \PY{n}{z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}
         \PY{n}{f} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{theta}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{z}\PY{o}{\PYZhy{}}\PY{n}{theta}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{theta}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
@@ -421,7 +421,7 @@ detail in this course.
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-[-2.8028028   3.04449458  2.4393433 ]
+[-2.9029029   3.30479398  2.3486577 ]
 
     \end{Verbatim}
 
@@ -430,6 +430,17 @@ detail in this course.
     \end{center}
     { \hspace*{\fill} \\}
     
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}training set accuracy}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training accuracy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sign}\PY{p}{(}\PY{n}{ypred}\PY{p}{)} \PY{o}{==} \PY{n}{y}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training accuracy: 0.93
+
+    \end{Verbatim}
+
     \begin{enumerate}
 \def\labelenumi{\alph{enumi})}
 \setcounter{enumi}{1}
@@ -490,7 +501,7 @@ detail in this course.
 \end{enumerate}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{filter\PYZus{}classes}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{cls1}\PY{p}{,} \PY{n}{cls2}\PY{p}{)}\PY{p}{:}
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{filter\PYZus{}classes}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{cls1}\PY{p}{,} \PY{n}{cls2}\PY{p}{)}\PY{p}{:}
             \PY{c+c1}{\PYZsh{} Reduces training set (X,y) so that it contains only labels cls1, cls2 and then maps the labels to \PYZob{}\PYZhy{}1,1\PYZcb{}}
             \PY{n}{cond} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}or}\PY{p}{(}\PY{n}{y} \PY{o}{==} \PY{n}{cls1}\PY{p}{,} \PY{n}{y} \PY{o}{==} \PY{n}{cls2}\PY{p}{)} 
             \PY{n}{X\PYZus{}red} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{cond}\PY{p}{,}\PY{p}{:}\PY{p}{]}
@@ -500,7 +511,7 @@ detail in this course.
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}Load data}
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{}Load data}
         \PY{n}{data}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mnist.npz}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
         \PY{n}{X\PYZus{}train}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
         \PY{n}{y\PYZus{}train}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
@@ -516,7 +527,7 @@ detail in this course.
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}6}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
         \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{rc}
         \PY{k}{def} \PY{n+nf}{obj\PYZus{}func}\PY{p}{(}\PY{n}{theta}\PY{p}{,}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n}{lambda\PYZus{}par}\PY{p}{)}\PY{p}{:}
@@ -606,56 +617,62 @@ detail in this course.
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-Train Error:    0.0416
+Train Error:    0.0422
 
     \end{Verbatim}
 
 \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}6}]:} Text(0.5,0,'k')
+{\color{outcolor}Out[{\color{outcolor}8}]:} Text(0.5,0,'k')
 \end{Verbatim}
             
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_6_2.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_7_2.png}
     \end{center}
     { \hspace*{\fill} \\}
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_6_3.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_7_3.png}
     \end{center}
     { \hspace*{\fill} \\}
     
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}ii) Evaluate classifier accuracy using the test set }
-        \PY{c+c1}{\PYZsh{}(digits 5 and 8 only) using your classifier.}
-        
-        \PY{n}{ypred\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sign}\PY{p}{(}\PY{n}{theta}\PY{n+nd}{@X\PYZus{}test}\PY{o}{.}\PY{n}{T}\PY{p}{)}
-        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test Error:    }\PY{l+s+si}{\PYZob{}0:1.4f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{ypred\PYZus{}test} \PY{o}{!=} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{}ii) Evaluate classifier accuracy using the test set }
+         \PY{c+c1}{\PYZsh{}(digits 5 and 8 only) using your classifier.}
+         
+         \PY{n}{ypred\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sign}\PY{p}{(}\PY{n}{theta}\PY{n+nd}{@X\PYZus{}test}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test Error:    }\PY{l+s+si}{\PYZob{}0:1.4f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{ypred\PYZus{}test} \PY{o}{!=} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-Test Error:    0.0445
+Test Error:    0.0418
 
     \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{}iii) Compare the accuracy of your classifier }
-        \PY{c+c1}{\PYZsh{}with the SVM implementation in sklearn.svm.LinearSVC.}
-        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{LinearSVC}
-        \PY{n}{clf} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{p}{)}
-        \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
-        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train accuracy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n+nb}{round}\PY{p}{(}\PY{n}{clf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
-        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train error:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n+nb}{round}\PY{p}{(}\PY{n}{clf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
-        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test accuracy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n+nb}{round}\PY{p}{(}\PY{n}{clf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
-        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test error:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n+nb}{round}\PY{p}{(}\PY{n}{clf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{}iii) Compare the accuracy of your classifier }
+         \PY{c+c1}{\PYZsh{}with the SVM implementation in sklearn.svm.LinearSVC.}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{LinearSVC}
+         \PY{n}{clf} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{p}{)}
+         \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train accuracy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n+nb}{round}\PY{p}{(}\PY{n}{clf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train error:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n+nb}{round}\PY{p}{(}\PY{n}{clf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test accuracy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n+nb}{round}\PY{p}{(}\PY{n}{clf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test error:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n+nb}{round}\PY{p}{(}\PY{n}{clf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-Train accuracy: 0.9772
-Train error: 0.022800000000000042
-Test accuracy: 0.9582
-Test error: 0.04179999999999995
+Train accuracy: 0.9768
+Train error: 0.0232
+Test accuracy: 0.9587
+Test error: 0.0413
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/emil/anaconda3/lib/python3.7/site-packages/sklearn/svm/base.py:922: ConvergenceWarning: Liblinear failed to converge, increase the number of iterations.
+  "the number of iterations.", ConvergenceWarning)
 
     \end{Verbatim}
 
@@ -731,46 +748,46 @@ tokens behind the features use
 \texttt{python\ \ \ \ \ trainMatrix,\ tokenlist,\ trainCategory\ =\ readMatrix(\textquotesingle{}MATRIX.TRAIN\textquotesingle{})\ \ \ \ \ testMatrix,\ tokenlist,\ testCategory\ =\ readMatrix(\textquotesingle{}MATRIX.TEST\textquotesingle{})}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}140}]:} \PY{k+kn}{import} \PY{n+nn}{read\PYZus{}spam\PYZus{}data} \PY{k}{as} \PY{n+nn}{rsd}
-          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{LinearSVC}
-          \PY{n}{trainMatrix}\PY{p}{,} \PY{n}{tokenlist}\PY{p}{,} \PY{n}{trainCategory} \PY{o}{=} \PY{n}{rsd}\PY{o}{.}\PY{n}{read\PYZus{}matrix}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MATRIX.TRAIN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-          \PY{n}{testMatrix}\PY{p}{,} \PY{n}{tokenlist}\PY{p}{,} \PY{n}{testCategory} \PY{o}{=} \PY{n}{rsd}\PY{o}{.}\PY{n}{read\PYZus{}matrix}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MATRIX.TEST}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-          
-          \PY{n}{trainMatrix50}\PY{p}{,} \PY{n}{tokenlist50}\PY{p}{,} \PY{n}{trainCategory50} \PY{o}{=} \PY{n}{rsd}\PY{o}{.}\PY{n}{read\PYZus{}matrix}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MATRIX.TRAIN.50}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-          \PY{n}{trainMatrix100}\PY{p}{,} \PY{n}{tokenlist100}\PY{p}{,} \PY{n}{trainCategory100} \PY{o}{=} \PY{n}{rsd}\PY{o}{.}\PY{n}{read\PYZus{}matrix}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MATRIX.TRAIN.100}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-          \PY{n}{trainMatrix200}\PY{p}{,} \PY{n}{tokenlist200}\PY{p}{,} \PY{n}{trainCategory200} \PY{o}{=} \PY{n}{rsd}\PY{o}{.}\PY{n}{read\PYZus{}matrix}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MATRIX.TRAIN.200}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-          \PY{n}{trainMatrix400}\PY{p}{,} \PY{n}{tokenlist400}\PY{p}{,} \PY{n}{trainCategory400} \PY{o}{=} \PY{n}{rsd}\PY{o}{.}\PY{n}{read\PYZus{}matrix}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MATRIX.TRAIN.400}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-          \PY{n}{trainMatrix800}\PY{p}{,} \PY{n}{tokenlist800}\PY{p}{,} \PY{n}{trainCategory800} \PY{o}{=} \PY{n}{rsd}\PY{o}{.}\PY{n}{read\PYZus{}matrix}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MATRIX.TRAIN.800}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-          \PY{n}{trainMatrix1400}\PY{p}{,} \PY{n}{tokenlist1400}\PY{p}{,} \PY{n}{trainCategory1400} \PY{o}{=} \PY{n}{rsd}\PY{o}{.}\PY{n}{read\PYZus{}matrix}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MATRIX.TRAIN.1400}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-          
-          
-          \PY{n}{lsvm} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)} 
-          \PY{n}{lsvm}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{trainMatrix}\PY{p}{,}\PY{n}{trainCategory}\PY{p}{)}
-          \PY{n+nb}{print}\PY{p}{(}\PY{n}{lsvm}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{testMatrix}\PY{p}{,}\PY{n}{testCategory}\PY{p}{)}\PY{p}{)}
-          
-          \PY{n}{lsvm50} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)} 
-          \PY{n}{lsvm50}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{trainMatrix50}\PY{p}{,}\PY{n}{trainCategory50}\PY{p}{)}
-          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{50:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{lsvm50}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{testMatrix}\PY{p}{,}\PY{n}{testCategory}\PY{p}{)}\PY{p}{)}
-          
-          \PY{n}{lsvm100} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)} 
-          \PY{n}{lsvm100}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{trainMatrix100}\PY{p}{,}\PY{n}{trainCategory100}\PY{p}{)}
-          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{100:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{lsvm100}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{testMatrix}\PY{p}{,}\PY{n}{testCategory}\PY{p}{)}\PY{p}{)}
-          
-          \PY{n}{lsvm200} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)} 
-          \PY{n}{lsvm200}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{trainMatrix200}\PY{p}{,}\PY{n}{trainCategory200}\PY{p}{)}
-          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{200:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{lsvm200}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{testMatrix}\PY{p}{,}\PY{n}{testCategory}\PY{p}{)}\PY{p}{)}
-          
-          \PY{n}{lsvm400} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)} 
-          \PY{n}{lsvm400}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{trainMatrix400}\PY{p}{,}\PY{n}{trainCategory400}\PY{p}{)}
-          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{400:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{lsvm400}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{testMatrix}\PY{p}{,}\PY{n}{testCategory}\PY{p}{)}\PY{p}{)}
-          
-          \PY{n}{lsvm800} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)} 
-          \PY{n}{lsvm800}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{trainMatrix800}\PY{p}{,}\PY{n}{trainCategory800}\PY{p}{)}
-          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{800:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{lsvm800}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{testMatrix}\PY{p}{,}\PY{n}{testCategory}\PY{p}{)}\PY{p}{)}
-          
-          \PY{n}{lsvm1400} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)} 
-          \PY{n}{lsvm1400}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{trainMatrix1400}\PY{p}{,}\PY{n}{trainCategory1400}\PY{p}{)}
-          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1400:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{lsvm1400}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{testMatrix}\PY{p}{,}\PY{n}{testCategory}\PY{p}{)}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}22}]:} \PY{k+kn}{import} \PY{n+nn}{read\PYZus{}spam\PYZus{}data} \PY{k}{as} \PY{n+nn}{rsd}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{LinearSVC}
+         \PY{n}{trainMatrix}\PY{p}{,} \PY{n}{tokenlist}\PY{p}{,} \PY{n}{trainCategory} \PY{o}{=} \PY{n}{rsd}\PY{o}{.}\PY{n}{read\PYZus{}matrix}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MATRIX.TRAIN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{testMatrix}\PY{p}{,} \PY{n}{tokenlist}\PY{p}{,} \PY{n}{testCategory} \PY{o}{=} \PY{n}{rsd}\PY{o}{.}\PY{n}{read\PYZus{}matrix}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MATRIX.TEST}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{trainMatrix50}\PY{p}{,} \PY{n}{tokenlist50}\PY{p}{,} \PY{n}{trainCategory50} \PY{o}{=} \PY{n}{rsd}\PY{o}{.}\PY{n}{read\PYZus{}matrix}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MATRIX.TRAIN.50}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{trainMatrix100}\PY{p}{,} \PY{n}{tokenlist100}\PY{p}{,} \PY{n}{trainCategory100} \PY{o}{=} \PY{n}{rsd}\PY{o}{.}\PY{n}{read\PYZus{}matrix}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MATRIX.TRAIN.100}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{trainMatrix200}\PY{p}{,} \PY{n}{tokenlist200}\PY{p}{,} \PY{n}{trainCategory200} \PY{o}{=} \PY{n}{rsd}\PY{o}{.}\PY{n}{read\PYZus{}matrix}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MATRIX.TRAIN.200}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{trainMatrix400}\PY{p}{,} \PY{n}{tokenlist400}\PY{p}{,} \PY{n}{trainCategory400} \PY{o}{=} \PY{n}{rsd}\PY{o}{.}\PY{n}{read\PYZus{}matrix}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MATRIX.TRAIN.400}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{trainMatrix800}\PY{p}{,} \PY{n}{tokenlist800}\PY{p}{,} \PY{n}{trainCategory800} \PY{o}{=} \PY{n}{rsd}\PY{o}{.}\PY{n}{read\PYZus{}matrix}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MATRIX.TRAIN.800}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{trainMatrix1400}\PY{p}{,} \PY{n}{tokenlist1400}\PY{p}{,} \PY{n}{trainCategory1400} \PY{o}{=} \PY{n}{rsd}\PY{o}{.}\PY{n}{read\PYZus{}matrix}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MATRIX.TRAIN.1400}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         
+         \PY{n}{lsvm} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)} 
+         \PY{n}{lsvm}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{trainMatrix}\PY{p}{,}\PY{n}{trainCategory}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{lsvm}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{testMatrix}\PY{p}{,}\PY{n}{testCategory}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{lsvm50} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)} 
+         \PY{n}{lsvm50}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{trainMatrix50}\PY{p}{,}\PY{n}{trainCategory50}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{50:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{lsvm50}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{testMatrix}\PY{p}{,}\PY{n}{testCategory}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{lsvm100} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)} 
+         \PY{n}{lsvm100}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{trainMatrix100}\PY{p}{,}\PY{n}{trainCategory100}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{100:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{lsvm100}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{testMatrix}\PY{p}{,}\PY{n}{testCategory}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{lsvm200} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)} 
+         \PY{n}{lsvm200}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{trainMatrix200}\PY{p}{,}\PY{n}{trainCategory200}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{200:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{lsvm200}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{testMatrix}\PY{p}{,}\PY{n}{testCategory}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{lsvm400} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)} 
+         \PY{n}{lsvm400}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{trainMatrix400}\PY{p}{,}\PY{n}{trainCategory400}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{400:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{lsvm400}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{testMatrix}\PY{p}{,}\PY{n}{testCategory}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{lsvm800} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)} 
+         \PY{n}{lsvm800}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{trainMatrix800}\PY{p}{,}\PY{n}{trainCategory800}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{800:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{lsvm800}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{testMatrix}\PY{p}{,}\PY{n}{testCategory}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{lsvm1400} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)} 
+         \PY{n}{lsvm1400}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{trainMatrix1400}\PY{p}{,}\PY{n}{trainCategory1400}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1400:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{lsvm1400}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{testMatrix}\PY{p}{,}\PY{n}{testCategory}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
 
@@ -782,6 +799,14 @@ tokens behind the features use
 400: 0.95625
 800: 0.97
 1400: 0.965
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/emil/anaconda3/lib/python3.7/site-packages/sklearn/svm/base.py:922: ConvergenceWarning: Liblinear failed to converge, increase the number of iterations.
+  "the number of iterations.", ConvergenceWarning)
+/home/emil/anaconda3/lib/python3.7/site-packages/sklearn/svm/base.py:922: ConvergenceWarning: Liblinear failed to converge, increase the number of iterations.
+  "the number of iterations.", ConvergenceWarning)
 
     \end{Verbatim}
 
@@ -825,55 +850,55 @@ in the LinearSVC class. The above feature selection method is discussed
 in http://proceedings.mlr.press/v3/chang08a/chang08a.pdf
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}148}]:} \PY{c+c1}{\PYZsh{}i)}
-          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
-          \PY{n}{theta} \PY{o}{=} \PY{n}{lsvm}\PY{o}{.}\PY{n}{coef\PYZus{}}
-          \PY{n}{abstheta} \PY{o}{=} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{theta}\PY{p}{)}
-          \PY{c+c1}{\PYZsh{}10 stærstu theta:}
-          \PY{n}{index10} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{abstheta}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{:}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
-          \PY{n}{max10\PYZus{}theta} \PY{o}{=} \PY{n}{theta}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{index10}\PY{p}{]}
-          \PY{n+nb}{print}\PY{p}{(}\PY{n}{max10\PYZus{}theta}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{}i)}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{n}{theta} \PY{o}{=} \PY{n}{lsvm}\PY{o}{.}\PY{n}{coef\PYZus{}}
+         \PY{n}{abstheta} \PY{o}{=} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{theta}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}10 stærstu theta:}
+         \PY{n}{index10} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{abstheta}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{:}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{max10\PYZus{}theta} \PY{o}{=} \PY{n}{theta}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{index10}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{max10\PYZus{}theta}\PY{p}{)}
 \end{Verbatim}
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-[ 0.41427361  0.41171377 -0.36579293  0.27131702 -0.25575369  0.24923277
-  0.23578956  0.23437205  0.2304037   0.22636743]
+[ 0.41426882  0.41171575 -0.36580629  0.27132645 -0.25565405  0.24922487
+  0.23579983  0.23434958  0.23042017  0.22636038]
 
     \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}149}]:} \PY{c+c1}{\PYZsh{}ii)}
-          \PY{n}{index20} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{abstheta}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{20}\PY{p}{:}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
-          \PY{n}{max20\PYZus{}theta} \PY{o}{=} \PY{n}{theta}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{index20}\PY{p}{]}
-          \PY{n+nb}{print}\PY{p}{(}\PY{n}{max20\PYZus{}theta}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{}ii)}
+         \PY{n}{index20} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{abstheta}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{20}\PY{p}{:}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{max20\PYZus{}theta} \PY{o}{=} \PY{n}{theta}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{index20}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{max20\PYZus{}theta}\PY{p}{)}
 \end{Verbatim}
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-[ 0.41427361  0.41171377 -0.36579293  0.27131702 -0.25575369  0.24923277
-  0.23578956  0.23437205  0.2304037   0.22636743  0.22395683 -0.20556691
-  0.20125095 -0.19291662 -0.18271114 -0.1823531   0.18159919  0.17945918
- -0.1778779  -0.17268974]
+[ 0.41426882  0.41171575 -0.36580629  0.27132645 -0.25565405  0.24922487
+  0.23579983  0.23434958  0.23042017  0.22636038  0.22396071 -0.2055404
+  0.20125581 -0.19297214 -0.18270477 -0.18234772  0.18161998  0.17948988
+ -0.17792172 -0.17267534]
 
     \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}150}]:} \PY{n}{n} \PY{o}{=} \PY{n}{trainMatrix}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
-          \PY{n}{p} \PY{o}{=} \PY{n}{trainMatrix}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
-          \PY{c+c1}{\PYZsh{}Vil núlla alla dálka úr trainmatrix sem eru ekki einn af þessum 20}
-          
-          \PY{n}{trainMatrix2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{n}{p}\PY{p}{)}\PY{p}{)}
-          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
-              \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{:}
-                  \PY{n}{trainMatrix2}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{index20}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{trainMatrix}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{index20}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{]}
-          
-          \PY{n}{lsvmDonk} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}
-          \PY{n}{lsvmDonk}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{trainMatrix2}\PY{p}{,}\PY{n}{trainCategory}\PY{p}{)}
-          
-          
-          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train accuracy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n+nb}{round}\PY{p}{(}\PY{n}{lsvmDonk}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{trainMatrix}\PY{p}{,}\PY{n}{trainCategory}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
-          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test accuracy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{lsvmDonk}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{testMatrix}\PY{p}{,}\PY{n}{testCategory}\PY{p}{)}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{n} \PY{o}{=} \PY{n}{trainMatrix}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{p} \PY{o}{=} \PY{n}{trainMatrix}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}Vil núlla alla dálka úr trainmatrix sem eru ekki einn af þessum 20}
+         
+         \PY{n}{trainMatrix2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{n}{p}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{trainMatrix2}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{index20}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{trainMatrix}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{index20}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{]}
+         
+         \PY{n}{lsvmDonk} \PY{o}{=} \PY{n}{LinearSVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}
+         \PY{n}{lsvmDonk}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{trainMatrix2}\PY{p}{,}\PY{n}{trainCategory}\PY{p}{)}
+         
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train accuracy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n+nb}{round}\PY{p}{(}\PY{n}{lsvmDonk}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{trainMatrix}\PY{p}{,}\PY{n}{trainCategory}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test accuracy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{lsvmDonk}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{testMatrix}\PY{p}{,}\PY{n}{testCategory}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
 
@@ -919,70 +944,70 @@ classifiers, with \(k\) typically 5 or 10 this could increase the
 training time 10-fold.
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}180}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{SVC}
-          \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{rc}
-          \PY{c+c1}{\PYZsh{}Load data}
-          \PY{n}{data}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mnist.npz}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-          \PY{n}{X\PYZus{}test}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
-          \PY{n}{y\PYZus{}test}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
-          
-          \PY{k}{def} \PY{n+nf}{rand\PYZus{}data}\PY{p}{(}\PY{n}{data}\PY{p}{,}\PY{n}{n}\PY{p}{,}\PY{n}{seed}\PY{p}{)}\PY{p}{:}
-              \PY{c+c1}{\PYZsh{} Tekur inn data og skilar X\PYZus{}train,y\PYZus{}train }
-              \PY{c+c1}{\PYZsh{} af lengd n sem er random subset af data}
-              \PY{n}{nn} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
-              \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{n}{seed}\PY{p}{)}
-              \PY{n}{rnd}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n}{nn}\PY{p}{)}\PY{p}{,} \PY{n}{n}\PY{p}{,} \PY{n}{replace}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
-              \PY{n}{X\PYZus{}train}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{rnd}\PY{p}{]}
-              \PY{n}{y\PYZus{}train}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{rnd}\PY{p}{]}
-              \PY{k}{return} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}
-          
-          \PY{n}{C} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{]}\PY{p}{)}
-          \PY{n}{gamma} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{1000}\PY{p}{]}\PY{p}{)}
-          \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{5000} \PY{c+c1}{\PYZsh{} magn af gögnum til að þjálfa á}
-          
-          \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n}{C}\PY{p}{:}
-              \PY{k}{for} \PY{n}{g} \PY{o+ow}{in} \PY{n}{gamma}\PY{p}{:}
-                  \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{rand\PYZus{}data}\PY{p}{(}\PY{n}{data}\PY{p}{,}\PY{n}{n}\PY{p}{,}\PY{n+nb}{int}\PY{p}{(}\PY{l+m+mi}{1000}\PY{o}{*}\PY{p}{(}\PY{n}{g}\PY{o}{+}\PY{n}{c}\PY{p}{)}\PY{p}{)}\PY{p}{)}
-                  \PY{n}{rbf} \PY{o}{=} \PY{n}{SVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{n}{c}\PY{p}{,}\PY{n}{gamma}\PY{o}{=}\PY{n}{g}\PY{p}{,}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rbf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-                  \PY{n}{rbf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
-                  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{c}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gamma =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{g}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test accuracy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{rbf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}26}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{SVC}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{rc}
+         \PY{c+c1}{\PYZsh{}Load data}
+         \PY{n}{data}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mnist.npz}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{X\PYZus{}test}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{y\PYZus{}test}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{k}{def} \PY{n+nf}{rand\PYZus{}data}\PY{p}{(}\PY{n}{data}\PY{p}{,}\PY{n}{n}\PY{p}{,}\PY{n}{seed}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Tekur inn data og skilar X\PYZus{}train,y\PYZus{}train }
+             \PY{c+c1}{\PYZsh{} af lengd n sem er random subset af data}
+             \PY{n}{nn} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{n}{seed}\PY{p}{)}
+             \PY{n}{rnd}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n}{nn}\PY{p}{)}\PY{p}{,} \PY{n}{n}\PY{p}{,} \PY{n}{replace}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+             \PY{n}{X\PYZus{}train}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{rnd}\PY{p}{]}
+             \PY{n}{y\PYZus{}train}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{rnd}\PY{p}{]}
+             \PY{k}{return} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}
+         
+         \PY{n}{C} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{]}\PY{p}{)}
+         \PY{n}{gamma} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{1000}\PY{p}{]}\PY{p}{)}
+         \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{5000} \PY{c+c1}{\PYZsh{} magn af gögnum til að þjálfa á}
+         
+         \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n}{C}\PY{p}{:}
+             \PY{k}{for} \PY{n}{g} \PY{o+ow}{in} \PY{n}{gamma}\PY{p}{:}
+                 \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{rand\PYZus{}data}\PY{p}{(}\PY{n}{data}\PY{p}{,}\PY{n}{n}\PY{p}{,}\PY{n+nb}{int}\PY{p}{(}\PY{l+m+mi}{1000}\PY{o}{*}\PY{p}{(}\PY{n}{g}\PY{o}{+}\PY{n}{c}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{rbf} \PY{o}{=} \PY{n}{SVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{n}{c}\PY{p}{,}\PY{n}{gamma}\PY{o}{=}\PY{n}{g}\PY{p}{,}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rbf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{rbf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{c}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gamma =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{g}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test accuracy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{rbf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-c= 1 gamma= 0.1 0.8696
-c= 1 gamma= 0.01 0.9507
-c= 1 gamma= 0.001 0.9071
-c= 10 gamma= 0.1 0.844
-c= 10 gamma= 0.01 0.9578
-c= 10 gamma= 0.001 0.9331
-c= 100 gamma= 0.1 0.8504
-c= 100 gamma= 0.01 0.9596
-c= 100 gamma= 0.001 0.9339
+C = 1 gamma = 0.1 Test accuracy: 0.8696
+C = 1 gamma = 0.01 Test accuracy: 0.9507
+C = 1 gamma = 0.001 Test accuracy: 0.9071
+C = 10 gamma = 0.1 Test accuracy: 0.844
+C = 10 gamma = 0.01 Test accuracy: 0.9578
+C = 10 gamma = 0.001 Test accuracy: 0.9331
+C = 100 gamma = 0.1 Test accuracy: 0.8504
+C = 100 gamma = 0.01 Test accuracy: 0.9596
+C = 100 gamma = 0.001 Test accuracy: 0.9339
 
     \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}181}]:} \PY{c+c1}{\PYZsh{}Hér ætlum við að þjálfa rbf með bestu gildum á C og gamma:}
-          \PY{c+c1}{\PYZsh{} bestu gildin eru C=100 og gamma=0.01 skv. liðnum á undan}
-          \PY{n}{data}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mnist.npz}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-          \PY{n}{X\PYZus{}test}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
-          \PY{n}{y\PYZus{}test}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
-          \PY{n}{X\PYZus{}train}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
-          \PY{n}{y\PYZus{}train}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
-          
-          \PY{n}{C} \PY{o}{=} \PY{l+m+mi}{100}
-          \PY{n}{gamma} \PY{o}{=} \PY{l+m+mf}{0.01}
-          \PY{n}{rbf} \PY{o}{=} \PY{n}{SVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{n}{C}\PY{p}{,}\PY{n}{gamma}\PY{o}{=}\PY{n}{gamma}\PY{p}{,}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rbf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-          \PY{n}{rbf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
-          \PY{n}{testScore}\PY{o}{=} \PY{n}{rbf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}
-          \PY{n}{trainScore} \PY{o}{=} \PY{n}{rbf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{}Hér ætlum við að þjálfa rbf með bestu gildum á C og gamma:}
+         \PY{c+c1}{\PYZsh{} bestu gildin eru C=100 og gamma=0.01 skv. liðnum á undan}
+         \PY{n}{data}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mnist.npz}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{X\PYZus{}test}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{y\PYZus{}test}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{X\PYZus{}train}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{y\PYZus{}train}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{n}{C} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{gamma} \PY{o}{=} \PY{l+m+mf}{0.01}
+         \PY{n}{rbf} \PY{o}{=} \PY{n}{SVC}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{n}{C}\PY{p}{,}\PY{n}{gamma}\PY{o}{=}\PY{n}{gamma}\PY{p}{,}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rbf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{rbf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{testScore}\PY{o}{=} \PY{n}{rbf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}
+         \PY{n}{trainScore} \PY{o}{=} \PY{n}{rbf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
 \end{Verbatim}
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}185}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test score:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{testScore}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
-          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train score:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{trainScore}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test score:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{testScore}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train score:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{trainScore}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
 

@@ -1,0 +1,869 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{hw6}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{REI602M Machine Learning - Homework
+6}\label{rei602m-machine-learning---homework-6}
+
+\subsubsection{Due: Monday 25.2.2019}\label{due-monday-25.2.2019}
+
+\textbf{Objectives}: Boosting and stacking algorithms in supervised
+learning
+
+\textbf{Name}: Emil Gauti Friðriksson, \textbf{email: } egf3@hi.is,
+\textbf{collaborators:} (if any)
+
+    1. {[}AdaBoost classifier, 50 points{]}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  {[}40 points{]} Implement the AdaBoost algorithm described on page 339
+  in ESL using small decision trees as base classifiers. Redo the
+  computations for the example of Figure 10.2. Plot the training error
+  as well as test error, and discuss its behavior.
+\end{enumerate}
+
+Use the following data set. The features
+\(x_1^{(i)},\ldots,x_{10}^{(i)}\) are standard independent normally
+distributed variables and the output is defined as \(y^{(i)}=1\) if
+\(\sum_{j=1}^{10} (x^{(i)}_j)^2 > 9.34\) and zero otherwise (see
+comments below).
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  {[}10 points{]} Repeat the experiments from a) using a decision tree
+  that captures 2-way feature interactions (3 leaf nodes). How do the
+  results differ from a)?
+\end{enumerate}
+
+\emph{Comments}:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Use \texttt{sklearn.tree.DecisionTreeClassifier} to generate the
+  decision trees. Tree stumps are obtained by setting
+  \texttt{max\_leaf\_nodes=2}. The behaviour of your ensemble classifier
+  may be somewhat different from the one shown in Figure 10.2 in ESL
+  since the implementation of the base tree classifier is different. For
+  this reason you can use e.g. 1000 boosting iterations instead of 400.
+\item
+  The \texttt{DecisionTreeClassifier.fit} function accepts a vector of
+  sample weights as an optional argument.
+\item
+  The training data set in a) is obtained with the function \texttt{hw6}
+  below with \texttt{hw6(n=1000)}. The test sets are obtained in the
+  same way but using \(n=10000\).
+\item
+  If \(\text{err}_m\) becomes zero we are done.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{tree} \PY{k}{import} \PY{n}{DecisionTreeClassifier}
+         
+         
+         \PY{k}{def} \PY{n+nf}{hw6}\PY{p}{(}\PY{n}{n}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Toy dataset from page 339 in ESL}
+             \PY{c+c1}{\PYZsh{}np.random.seed(1)}
+             \PY{n}{X}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{n}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+             \PY{n}{y}\PY{o}{=}\PY{l+m+mi}{2}\PY{o}{*}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{X}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{l+m+mf}{9.34}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+             \PY{k}{return} \PY{n}{X}\PY{p}{,}\PY{n}{y}
+         
+         \PY{k}{def} \PY{n+nf}{AdaBoostM1}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{,}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{M}\PY{p}{,}\PY{n}{max\PYZus{}ln}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+             \PY{n}{n}\PY{o}{=}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{n2}\PY{o}{=}\PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{w}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{o}{/}\PY{n}{n}
+             \PY{n}{G\PYZus{}train} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{n}{M}\PY{p}{)}\PY{p}{)}
+             \PY{n}{G\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{n2}\PY{p}{,}\PY{n}{M}\PY{p}{)}\PY{p}{)}
+             \PY{n}{GG\PYZus{}train} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{n}{M}\PY{p}{)}\PY{p}{)}
+             \PY{n}{GG\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{n2}\PY{p}{,}\PY{n}{M}\PY{p}{)}\PY{p}{)}
+             
+             \PY{k}{for} \PY{n}{m} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{M}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{G}\PY{o}{=}\PY{n}{DecisionTreeClassifier}\PY{p}{(}\PY{n}{max\PYZus{}leaf\PYZus{}nodes}\PY{o}{=}\PY{n}{max\PYZus{}ln}\PY{p}{)}
+                 \PY{n}{G}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{,}\PY{n}{sample\PYZus{}weight}\PY{o}{=}\PY{n}{w}\PY{p}{)}
+                 \PY{n}{y\PYZus{}train\PYZus{}pred} \PY{o}{=} \PY{n}{G}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+                 \PY{n}{I} \PY{o}{=} \PY{n}{y\PYZus{}train} \PY{o}{!=} \PY{n}{y\PYZus{}train\PYZus{}pred}
+                 \PY{n}{err}\PY{o}{=} \PY{n}{w}\PY{o}{*}\PY{n}{I}
+                 \PY{n}{error} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{err}\PY{p}{)}\PY{o}{/}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{w}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{error} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{k}{break}
+                 \PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{error}\PY{p}{)}\PY{o}{/}\PY{n}{error}\PY{p}{)}
+                 \PY{n}{w} \PY{o}{=} \PY{n}{w}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{a}\PY{o}{*}\PY{n}{I}\PY{p}{)}
+                 \PY{n}{G\PYZus{}train}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{m}\PY{p}{]} \PY{o}{=} \PY{n}{a}\PY{o}{*}\PY{n}{G}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+                 \PY{n}{G\PYZus{}test}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{m}\PY{p}{]} \PY{o}{=} \PY{n}{a}\PY{o}{*}\PY{n}{G}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+                 \PY{n}{GG\PYZus{}train}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{m}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{G\PYZus{}train}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{n}{m}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n}{GG\PYZus{}test}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{m}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{G\PYZus{}test}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{n}{m}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             
+             
+             \PY{k}{return} \PY{n}{GG\PYZus{}train}\PY{p}{,} \PY{n}{GG\PYZus{}test}
+         
+         \PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{hw6}\PY{p}{(}\PY{n}{n}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}
+         \PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{hw6}\PY{p}{(}\PY{n}{n}\PY{o}{=}\PY{l+m+mi}{10000}\PY{p}{)}
+         \PY{n}{n}\PY{o}{=}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{n2}\PY{o}{=}\PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{M}\PY{o}{=}\PY{l+m+mi}{1000}
+         \PY{n}{trainError}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{M}\PY{p}{)}
+         \PY{n}{testError}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{M}\PY{p}{)}
+         \PY{n}{G\PYZus{}train}\PY{p}{,}\PY{n}{G\PYZus{}test} \PY{o}{=} \PY{n}{AdaBoostM1}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{,}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{M}\PY{p}{)}
+         \PY{k}{for} \PY{n}{m} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{M}\PY{p}{)}\PY{p}{:}
+             \PY{n}{y\PYZus{}train\PYZus{}pred} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sign}\PY{p}{(}\PY{n}{G\PYZus{}train}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{m}\PY{p}{]}\PY{p}{)}
+             \PY{n}{y\PYZus{}test\PYZus{}pred} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sign}\PY{p}{(}\PY{n}{G\PYZus{}test}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{m}\PY{p}{]}\PY{p}{)}
+             \PY{n}{error\PYZus{}train} \PY{o}{=} \PY{n}{y\PYZus{}train\PYZus{}pred} \PY{o}{!=} \PY{n}{y\PYZus{}train}
+             \PY{n}{error\PYZus{}test} \PY{o}{=} \PY{n}{y\PYZus{}test\PYZus{}pred} \PY{o}{!=} \PY{n}{y\PYZus{}test}
+             \PY{n}{trainError}\PY{p}{[}\PY{n}{m}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{error\PYZus{}train}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+             \PY{n}{testError}\PY{p}{[}\PY{n}{m}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{error\PYZus{}test}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{n2}\PY{p}{)}
+             
+             
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{c+c1}{\PYZsh{}Plottum myndina:}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{M}\PY{p}{)}\PY{p}{,}\PY{n}{testError}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{n}{M}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test Error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{M}\PY{p}{)}\PY{p}{,}\PY{n}{trainError}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{n}{M}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train Error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Boosting Iterations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:} <matplotlib.legend.Legend at 0x15bc34083c8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_3_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Grafið sýnir að Test/Train - error byrjar í háu gildi \(\approx 0.4\)
+sem er lítið betra heldur en að giska af handahófi en það fer hratt
+lækkandi og nálgast eitthvað gildi.
+
+    \textbf{(b) Liður}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{hw6}\PY{p}{(}\PY{n}{n}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}
+         \PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{hw6}\PY{p}{(}\PY{n}{n}\PY{o}{=}\PY{l+m+mi}{10000}\PY{p}{)}
+         \PY{n}{n}\PY{o}{=}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{n2}\PY{o}{=}\PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{M}\PY{o}{=}\PY{l+m+mi}{1000}
+         \PY{n}{trainError\PYZus{}b}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{M}\PY{p}{)}
+         \PY{n}{testError\PYZus{}b}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{M}\PY{p}{)}
+         \PY{n}{G\PYZus{}train\PYZus{}b}\PY{p}{,}\PY{n}{G\PYZus{}test\PYZus{}b} \PY{o}{=} \PY{n}{AdaBoostM1}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{,}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{M}\PY{p}{,}\PY{n}{max\PYZus{}ln}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{k}{for} \PY{n}{m} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{M}\PY{p}{)}\PY{p}{:}
+             \PY{n}{y\PYZus{}train\PYZus{}pred\PYZus{}b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sign}\PY{p}{(}\PY{n}{G\PYZus{}train\PYZus{}b}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{m}\PY{p}{]}\PY{p}{)}
+             \PY{n}{y\PYZus{}test\PYZus{}pred\PYZus{}b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sign}\PY{p}{(}\PY{n}{G\PYZus{}test\PYZus{}b}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{m}\PY{p}{]}\PY{p}{)}
+             \PY{n}{error\PYZus{}train\PYZus{}b} \PY{o}{=} \PY{n}{y\PYZus{}train\PYZus{}pred\PYZus{}b} \PY{o}{!=} \PY{n}{y\PYZus{}train}
+             \PY{n}{error\PYZus{}test\PYZus{}b} \PY{o}{=} \PY{n}{y\PYZus{}test\PYZus{}pred\PYZus{}b} \PY{o}{!=} \PY{n}{y\PYZus{}test}
+             \PY{n}{trainError\PYZus{}b}\PY{p}{[}\PY{n}{m}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{error\PYZus{}train\PYZus{}b}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+             \PY{n}{testError\PYZus{}b}\PY{p}{[}\PY{n}{m}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{error\PYZus{}test\PYZus{}b}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{n2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c+c1}{\PYZsh{}Plottum myndina:}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{M}\PY{p}{)}\PY{p}{,}\PY{n}{testError\PYZus{}b}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{n}{M}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test Error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{M}\PY{p}{)}\PY{p}{,}\PY{n}{trainError\PYZus{}b}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{n}{M}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train Error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Boosting Iterations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:} <matplotlib.legend.Legend at 0x15bc69b86a0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_7_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Hér er aðal breytingin hversu hratt villan(error) fellur sem fall af
+Boosting iteration. Hún fellur töluvert hraðar þegar
+\emph{max\_leaf\_note=3} í staðinn fyrir \emph{max\_leaf\_note=2} eins
+og í \textbf{(a)} lið. Við fáum einnig lægri skekkju á þjálfunargögnunum
+okkar en skekkjan á prófunargögnunum virðist haldast að mestu leiti sú
+sama.
+
+    2. {[}Stacked regression models, 50 points{]} In this problem you will
+construct a stacked two-stage regression model for a subset of the
+Million Song Database (MSD). The data set contains audio features for
+approximately 500K songs. Each song is represented by 90 features
+describing its "timbre" that are derived from the sampled recordings.
+The task is to predict the release year of a song.
+
+A two-stage stacking model has several regression models in stage 1, all
+trained on the same data set. Predictions from stage 1 models form a new
+(derived) data set which is used as input to a single regression model
+in stage 2. This model "blends" predictions from the stage 1 models to
+create a final prediction, hopefully more accurate than the individual
+stage 1 predictions.
+
+Your stacked regression model will employ Lasso, ExtraTrees, Random
+Forests and Gradient boosted trees in stage 1 and a linear regression
+model in stage 2. Training and testing are performed as follows:
+
+\emph{Training}: Train each model on the training set, using default
+parameters to begin with, but increase the number of trees for Extra
+Trees and Random Forests. Construct a training data set for the stage 2
+model by sending the \emph{validation} set (not the original training
+set) through each of the stage 1 models, resulting in an \texttt{n\_val}
+by 4 matrix \(X_2\). Train a linear regression model for stage 2 on
+\((X_2, y_\text{val})\).
+
+\emph{Testing}: Send the test data though all the models in stage 1 to
+obtain an \texttt{n\_test} by 4 matrix. The stage 2 linear regression
+model is used to predict the data in this matrix to obtain the final
+predictions.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  {[}32 points{]} Construct the stacked regression model described
+  above, report its mean-squared error and \(R^2\) coefficient on the
+  test set. Report also the mean-squared error of the individual stage 1
+  models.
+\item
+  {[}8 points{]} Answer the following questions:
+\item
+  Are the individual models doing a good job on the prediction task? Why
+  or why not?
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi})}
+\setcounter{enumi}{1}
+\item
+  Is the stacking procedure worth the extra effort in your opinion? Why
+  or why not?
+\item
+  Are any of the regression models sensitive to scaling of input data?
+\item
+  Why is it not a good idea to use the original training set to
+  construct the \(X_2\) data set for the stage 2 regression model?
+\item
+  {[}10 points{]} In the spirit of Kaggle, can you improve the results
+  from a) by tuning hyperparameters in level 1, using a different
+  regression model in stage 2 or more training data?
+\end{enumerate}
+
+\emph{Comments}:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Download the subset of the Million Song Databse from here (210 MB):
+  http://archive.ics.uci.edu/ml/datasets/YearPredictionMSD\# (mirror:
+  https://notendur.hi.is/steinng/kennsla/2019/ml/data/YearPredictionMSD.zip)
+\item
+  Use the train, validation and test partitions of the data defined in
+  \texttt{load\_msd.py}
+\end{enumerate}
+
+\texttt{import\ load\_msd\ as\ lmsd\ X\_train,\ y\_train,\ X\_val,\ y\_val,\ X\_test,\ y\_test\ =\ lmsd.get\_data(ntrain=10000)}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  For Extra Trees and Random Forests you can set \texttt{n\_jobs=-1} to
+  use multiple cores/processors for training and prediction.
+\end{enumerate}
+
+    \textbf{(a)}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Your stacked regression model will employ Lasso, ExtraTrees, Random Forests }
+        \PY{c+c1}{\PYZsh{} and Gradient boosted trees in stage 1 and a linear regression model in stage 2}
+        \PY{k+kn}{import} \PY{n+nn}{load\PYZus{}msd}
+        \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}val}\PY{p}{,} \PY{n}{y\PYZus{}val}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{load\PYZus{}msd}\PY{o}{.}\PY{n}{get\PYZus{}data}\PY{p}{(}\PY{n}{ntrain}\PY{o}{=}\PY{l+m+mi}{10000}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} STAGE I}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{linear\PYZus{}model}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{ExtraTreesRegressor}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{RandomForestRegressor}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{GradientBoostingRegressor}
+        
+        \PY{n}{La} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{Lasso}\PY{p}{(}\PY{p}{)}
+        \PY{n}{Et} \PY{o}{=} \PY{n}{ExtraTreesRegressor}\PY{p}{(}\PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{500}\PY{p}{)}
+        \PY{n}{Rf} \PY{o}{=} \PY{n}{RandomForestRegressor}\PY{p}{(}\PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{500}\PY{p}{)}
+        \PY{n}{Gbt} \PY{o}{=} \PY{n}{GradientBoostingRegressor}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{names} \PY{o}{=} \PY{p}{[}\PY{n}{La}\PY{p}{,}\PY{n}{Et}\PY{p}{,}\PY{n}{Rf}\PY{p}{,}\PY{n}{Gbt}\PY{p}{]}
+        \PY{n}{n\PYZus{}val} \PY{o}{=} \PY{n}{X\PYZus{}val}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n}{X2\PYZus{}val} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{n\PYZus{}val}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
+            \PY{n}{names}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+            \PY{n}{X2\PYZus{}val}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{names}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}val}\PY{p}{)}
+        
+            
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} STAGE II}
+        
+        \PY{n}{Lr} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+        \PY{n}{Lr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X2\PYZus{}val}\PY{p}{,}\PY{n}{y\PYZus{}val}\PY{p}{)}
+        
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TEST DATA}
+        \PY{n}{n\PYZus{}test} \PY{o}{=} \PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n}{X2\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{n\PYZus{}test}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
+            \PY{n}{X2\PYZus{}test}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{names}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}Report individual test score:}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{mean\PYZus{}squared\PYZus{}error} \PY{k}{as} \PY{n}{mse}\PY{p}{,} \PY{n}{r2\PYZus{}score} \PY{k}{as} \PY{n}{r2}
+        \PY{n}{names\PYZus{}str} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lasso}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ExtraTrees}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RandomForest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GradientBoosting}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{MSE} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+        \PY{n}{R2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}STAGE I}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:\PYZlt{}20s\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}7s\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}12s\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}12s\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Stage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{R\PYZca{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MSE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{*}\PY{l+m+mi}{50}\PY{p}{)}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
+            \PY{n}{MSE}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{mse}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{X2\PYZus{}test}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+            \PY{n}{R2}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{r2}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{X2\PYZus{}test}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:\PYZlt{}20s\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}7s\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}12f\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}12f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{names\PYZus{}str}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{I}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{R2}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{MSE}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        \PY{n}{ypred} \PY{o}{=} \PY{n}{Lr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X2\PYZus{}test}\PY{p}{)}
+        \PY{n}{MSE}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{=} \PY{n}{mse}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{ypred}\PY{p}{)}
+        \PY{n}{R2}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{=} \PY{n}{r2}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{ypred}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:\PYZlt{}20s\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}7s\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}12f\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}12f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LinearRegression}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{II}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{R2}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,}\PY{n}{MSE}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Model                Stage   R\^{}2          MSE         
+--------------------------------------------------
+Lasso                I       0.220785     91.414913   
+ExtraTrees           I       0.228315     90.531476   
+RandomForest         I       0.209047     92.791926   
+GradientBoosting     I       0.243151     88.791010   
+LinearRegression     II      0.264345     86.304618   
+
+    \end{Verbatim}
+
+    \textbf{(b)}
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi})}
+\tightlist
+\item
+  Are the individual models doing a good job on the prediction task? Why
+  or why not?
+\end{enumerate}
+
+Öll fyrstu fjögur módelin standa sig svipað vel og eru að standa sig
+ágætlega miðað við verkefnið.
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Is the stacking procedure worth the extra effort in your opinion? Why
+  or why not?
+\end{enumerate}
+
+Við fáum betri niðurstöður svo já ég tel þetta vera þess virði.
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Are any of the regression models sensitive to scaling of input data?
+\end{enumerate}
+
+Lasso er nokkuð viðkvæmt fyrir skölun en decision trees(random forest og
+Extra trees) er það ekki. Gradient boosting er ekki viðkæmt fyrir
+skölun. Linear regression er mjög viðkvæmt fyrir skölun.
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi})}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Why is it not a good idea to use the original training set to
+  construct the X2 data set for the stage 2 regression model?
+\end{enumerate}
+
+því þá erum við að nota training gögnin sem við notuðum til að fitta
+stage I en við viljum ekki fá bias þar sem í Stage I er
+\(Error_{train}<Error_{val}\)
+
+    \textbf{(c)} In the spirit of Kaggle, can you improve the results from
+a) by tuning hyperparameters in level 1, using a different regression
+model in stage 2 or more training data?
+
+    Byrjum á að prófa nýja hyperparameters fyrir Stage I
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{cross\PYZus{}val\PYZus{}score}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{GridSearchCV}
+         \PY{n}{La2} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{Lasso}\PY{p}{(}\PY{p}{)}
+         \PY{n}{Et2} \PY{o}{=} \PY{n}{ExtraTreesRegressor}\PY{p}{(}\PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{500}\PY{p}{)}
+         \PY{n}{Rf2} \PY{o}{=} \PY{n}{RandomForestRegressor}\PY{p}{(}\PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{500}\PY{p}{)}
+         \PY{n}{Gbt2} \PY{o}{=} \PY{n}{GradientBoostingRegressor}\PY{p}{(}\PY{p}{)}
+         \PY{n}{parametersGbt} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loss}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ls}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{huber}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{quantile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{learning\PYZus{}rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{l+m+mf}{0.4}\PY{p}{,}\PY{l+m+mf}{0.7}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}estimators}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:}\PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{300}\PY{p}{]}\PY{p}{\PYZcb{}}
+         \PY{n}{parametersLa} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alpha}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{l+m+mf}{0.3}\PY{p}{,}\PY{l+m+mf}{0.6}\PY{p}{,}\PY{l+m+mf}{0.8}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{\PYZcb{}}
+         
+         \PY{n}{clfLa} \PY{o}{=} \PY{n}{GridSearchCV}\PY{p}{(}\PY{n}{La2}\PY{p}{,} \PY{n}{parametersLa}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{n}{clfGbt} \PY{o}{=} \PY{n}{GridSearchCV}\PY{p}{(}\PY{n}{Gbt}\PY{p}{,} \PY{n}{parametersGbt}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{n}{clfLa}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{clfGbt}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} GridSearchCV(cv=5, error\_score='raise',
+                estimator=GradientBoostingRegressor(alpha=0.9, criterion='friedman\_mse', init=None,
+                      learning\_rate=0.1, loss='ls', max\_depth=3, max\_features=None,
+                      max\_leaf\_nodes=None, min\_impurity\_decrease=0.0,
+                      min\_impurity\_split=None, min\_samples\_leaf=1,
+                      min\_samples\_split=2, min\_weight\_fraction\_leaf=0.0,
+                      n\_estimators=100, presort='auto', random\_state=None,
+                      subsample=1.0, verbose=0, warm\_start=False),
+                fit\_params=None, iid=True, n\_jobs=1,
+                param\_grid=\{'loss': ['ls', 'lad', 'huber', 'quantile'], 'learning\_rate': [0.1, 0.4, 0.7, 1], 'n\_estimators': [10, 100, 300]\},
+                pre\_dispatch='2*n\_jobs', refit=True, return\_train\_score='warn',
+                scoring=None, verbose=0)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TrainScore Lasso: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{clfLa}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{testScore Lasso: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{clfLa}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TrainScore GradientBoost: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{clfGbt}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{testScore GradientBoost: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{clfGbt}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Bestu parametrar Lasso:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{clfLa}\PY{o}{.}\PY{n}{best\PYZus{}params\PYZus{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Bestu parametrar GradientBoost:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{clfGbt}\PY{o}{.}\PY{n}{best\PYZus{}params\PYZus{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+TrainScore:  0.24665509223597157
+testScore:  0.22235833724798204
+TrainScore:  0.44969610258294157
+testScore:  0.254409374190794
+Bestu parametrar: \{'alpha': 0.3\}
+Bestu parametrar: \{'learning\_rate': 0.1, 'loss': 'huber', 'n\_estimators': 300\}
+
+    \end{Verbatim}
+
+    Notum þessa parametra til að prófa á linearRegression í Stage II
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{n\PYZus{}val} \PY{o}{=} \PY{n}{X\PYZus{}val}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{X2\PYZus{}val2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{n\PYZus{}val}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{Et2}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{Rf2}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{X2\PYZus{}val2}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{clfLa}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}val}\PY{p}{)}
+         \PY{n}{X2\PYZus{}val2}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{Et2}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}val}\PY{p}{)}
+         \PY{n}{X2\PYZus{}val2}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{Rf2}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}val}\PY{p}{)}
+         \PY{n}{X2\PYZus{}val2}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{=} \PY{n}{clfGbt}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}val}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{Lr2} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{Lr2}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X2\PYZus{}val2}\PY{p}{,}\PY{n}{y\PYZus{}val}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:} LinearRegression(copy\_X=True, fit\_intercept=True, n\_jobs=1, normalize=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{n\PYZus{}test} \PY{o}{=} \PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{X2\PYZus{}test2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{n\PYZus{}test}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+         \PY{n}{names2} \PY{o}{=} \PY{p}{[}\PY{n}{clfLa}\PY{p}{,}\PY{n}{Et2}\PY{p}{,}\PY{n}{Rf2}\PY{p}{,}\PY{n}{clfGbt}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
+             \PY{n}{X2\PYZus{}test2}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{names2}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}Report individual test score:}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{mean\PYZus{}squared\PYZus{}error} \PY{k}{as} \PY{n}{mse}\PY{p}{,} \PY{n}{r2\PYZus{}score} \PY{k}{as} \PY{n}{r2}
+         \PY{n}{names\PYZus{}str} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lasso}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ExtraTrees}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RandomForest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GradientBoosting}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{MSE2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{n}{R22} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}STAGE I}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:\PYZlt{}20s\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}7s\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}12s\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}12s\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Stage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{R\PYZca{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MSE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{*}\PY{l+m+mi}{50}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
+             \PY{n}{MSE2}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{mse}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{X2\PYZus{}test2}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+             \PY{n}{R22}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{r2}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{X2\PYZus{}test2}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:\PYZlt{}20s\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}7s\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}12f\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}12f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{names\PYZus{}str}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{I}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{R22}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{MSE2}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ypred2} \PY{o}{=} \PY{n}{Lr2}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X2\PYZus{}test2}\PY{p}{)}
+         \PY{n}{MSE2}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{=} \PY{n}{mse}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{ypred2}\PY{p}{)}
+         \PY{n}{R22}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{=} \PY{n}{r2}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{ypred2}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:\PYZlt{}20s\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}7s\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}12f\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}12f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LinearRegression}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{II}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{R22}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,}\PY{n}{MSE2}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Model                Stage   R\^{}2          MSE         
+--------------------------------------------------
+Lasso                I       0.222358     91.230297   
+ExtraTrees           I       0.228145     90.551409   
+RandomForest         I       0.210713     92.596431   
+GradientBoosting     I       0.254409     87.470177   
+LinearRegression     II      0.275475     84.998801   
+
+    \end{Verbatim}
+
+    Sjáum því að við fáum örlítið betri niðurstöður við það að breyta
+parametrum í stage I
+
+    Prófum nú að nota eitthvað annað en Linear Regression, notum SVC og
+Logistic regression:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{SVC}
+         \PY{n}{rbf} \PY{o}{=} \PY{n}{SVC}\PY{p}{(}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rbf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{rbf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X2\PYZus{}val2}\PY{p}{,}\PY{n}{y\PYZus{}val}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:\PYZlt{}20s\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}7s\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}12s\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}12s\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Stage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{R\PYZca{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MSE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{*}\PY{l+m+mi}{50}\PY{p}{)}
+         \PY{n}{ypred\PYZus{}rbf} \PY{o}{=} \PY{n}{rbf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X2\PYZus{}test2}\PY{p}{)}
+         \PY{n}{MSE\PYZus{}rbf} \PY{o}{=} \PY{n}{mse}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{ypred\PYZus{}rbf}\PY{p}{)}
+         \PY{n}{R2\PYZus{}rbf} \PY{o}{=} \PY{n}{r2}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{ypred\PYZus{}rbf}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:\PYZlt{}20s\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}7s\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}12f\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}12f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SVC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{II}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{R2\PYZus{}rbf}\PY{p}{,}\PY{n}{MSE\PYZus{}rbf}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Model                Stage   R\^{}2          MSE         
+--------------------------------------------------
+SVC                  II      -0.074020    126.000348  
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LogisticRegression}
+         \PY{n}{Logr} \PY{o}{=} \PY{n}{LogisticRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{Logr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X2\PYZus{}val2}\PY{p}{,}\PY{n}{y\PYZus{}val}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:\PYZlt{}20s\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}7s\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}12s\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}12s\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Stage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{R\PYZca{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MSE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{*}\PY{l+m+mi}{50}\PY{p}{)}
+         \PY{n}{ypred\PYZus{}Logr} \PY{o}{=} \PY{n}{Logr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X2\PYZus{}test2}\PY{p}{)}
+         \PY{n}{MSE\PYZus{}Logr} \PY{o}{=} \PY{n}{mse}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{ypred\PYZus{}Logr}\PY{p}{)}
+         \PY{n}{R2\PYZus{}Logr} \PY{o}{=} \PY{n}{r2}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{ypred\PYZus{}Logr}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:\PYZlt{}20s\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}7s\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}12f\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}:\PYZlt{}12f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Logistic Regr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{II}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{R2\PYZus{}Logr}\PY{p}{,}\PY{n}{MSE\PYZus{}Logr}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Model                Stage   R\^{}2          MSE         
+--------------------------------------------------
+Logistic Regr        II      -0.559512    182.956687  
+
+    \end{Verbatim}
+
+    Ég prófaði hér bæði SVC og Logistic regression en þau gáfu okkur verri
+niðurstöður en Linear Regression. Skölun gæti hjálpað hér þó.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

@@ -1,0 +1,996 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{hw8}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{\texorpdfstring{REI602M Machine Learning - Homework 8
+(\textbf{UNDER
+CONSTRUCTION!!!})}{REI602M Machine Learning - Homework 8 (UNDER CONSTRUCTION!!!)}}\label{rei602m-machine-learning---homework-8-under-construction}
+
+\subsubsection{\texorpdfstring{Due: \emph{Monday}
+11.3.2019}{Due: Monday 11.3.2019}}\label{due-monday-11.3.2019}
+
+\textbf{Objectives}: Topic discovery with NMF, Image compression with
+PCA and NMF, Spectral clustering
+
+\textbf{Name}: Emil Gauti Friðriksson, \textbf{email: } egf3@hi.is,
+\textbf{collaborators:} (if any)
+
+    1. {[}\emph{Topic discovery with NMF}, 40 points{]}. Here you will use
+non-negative matrix factorization (NMF) to analyze the content of tweets
+from Donald Trump. In particular, you will attempt to discover the main
+topics of his tweets by applying NMF to a document-term matrix derived
+from the tweets (or rather to a "tweet-term" matrix).
+
+The NMF approximates a non-negative \(n \times p\) matrix \(X\) of rank
+\(r\) with a rank \(k \leq r\) matrix such that
+
+\[
+X \approx WH
+\]
+
+where \(W\) is a \(n \times k\) matrix with \(W_{ij} \geq 0\) and \(H\)
+is a \(k \times p\) matrix with \(H_{ij} \geq 0\). Provided that \(k\)
+is appropriately chosen, the \emph{weight matrix} \(W\) and
+\emph{coefficient matrix} \(H\) can reveal interesting structures in the
+data. Column \(j\) of \(X\) is approximated with (see comment 1 below)
+
+\[
+X_{:,j} \approx (WH)_{:,j} = H_{1j}W_{:,1} + H_{2j}W_{:,2} + \ldots + H_{kj}W_{:,k}
+\]
+
+where the subscript \(:,j\) denotes column \(j\). The columns of \(W\)
+in this context correspond to the main topics of Trump's tweets and
+column \(j\) of \(H\) contains information on how the topics are "mixed"
+together to form (approximately) column \(j\) of \(X\).
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Download all tweets by Trump from
+  http://www.trumptwitterarchive.com/archive from the period 20.1.2017
+  (inauguration day) to present, omitting retweets, as a CSV file
+  (approx. 5800 tweets). Create a tweet-term matrix using word counts
+  (see below). For a given value of \(k\), perform NMF on the matrix and
+  list the words corresponding to the largest \(H_{ij}\) values for
+  columns \(j=1,\ldots,k\). You need to experiment with different values
+  of \(k\) (a.k.a. the \emph{Trump-dimension}) to get interesting topic
+  groupings. If \(k\) is too low different topics will be mixed
+  together, when \(k\) gets large, the same subject will appear in
+  multiple clusters. Report your results (c.a. 20 words on each topic)
+  for the value of \(k\) that you end up picking.
+\item
+  Select two topics of "interest" (e.g. Trump's nemesis Hillary
+  Clinton). Identify the corresponding columns in \(W\) and list approx.
+  5 tweets using the largest \(W\)-values as indices. Does the content
+  of the tweets match the selected topics?
+\end{enumerate}
+
+\emph{Comments}:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  The \(n \times k\) matrix-vector product \(y=Ax\) can be interpreted
+  as a weighted sum of the columns of \(A\), \[
+  y=
+  \begin{array}{ccc}
+  ~\mid &  & ~\mid \\
+  x_1 a_1 & + \ldots + & x_k a_k \\
+  ~\mid & & ~\mid \\
+  \end{array}
+  \] and matrix multiplication can be considered as multiple
+  matrix-vector products.
+\item
+  Use the NMF implementation in\texttt{from\ sklearn.decomposition.NMF}.
+  You can use the Wikipedia data set from HW7 to test your NMF-based
+  topic discovery code. Once you get convincing results, apply your code
+  to the newly constructed tweet-term matrix.
+\item
+  Use \texttt{sklearn.feature\_extraction.text.CountVectorizer} to
+  create the document-term matrix based on word counts from the raw
+  tweets. This function performs tokenization, counting and
+  normalization and removes stop words. Use the following parameter
+  values \texttt{max\_features=k}, \texttt{max\_df=0.95} (remove words
+  that occur in at least 95\% of the documents), \texttt{min\_df=2}
+  (remove words that occur in fewer than two documents),
+  \texttt{stop\_words=\textquotesingle{}english\textquotesingle{}}.
+\item
+  Use \texttt{CountVectorizer.get\_feature\_names()} to get the list of
+  words that were retained. Sidenote: Rare words are downplayed by the
+  term-frequency encoding used here but they are often found to be
+  informative. Therefore people often encode the text using
+  term-frequency-inverse document frequency.
+\item
+  Scikit's NMF function obtaines the factorization \(X \approx WH\) by
+  minimizing the objective function \(0.5||X - WH||_F^2\) (here
+  \(||A||_F\) denotes the Frobenius norm of a matrix \(A\),
+  \(||A||_F = \sqrt{\sum_{i=1}^n \sum_{j=1}^n A_{ij}^2}\). The NMF
+  implementation provides means to regularize the solution via
+  parameters \texttt{alpha} and \texttt{l1\_ratio}. You may want to
+  experiment with these parameters to see if you can improve the list of
+  topics.
+\item
+  The \(H\) matrix is stored in \texttt{nmf.components\_}
+\item
+  The NMF is described briefly in section 14.6 of ESL. A more detailed
+  account can be found in the original article
+  http://www.columbia.edu/\textasciitilde{}jwp2128/Teaching/E4903/papers/nmf\_nature.pdf
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{decomposition} \PY{k}{import} \PY{n}{NMF}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{feature\PYZus{}extraction}\PY{n+nn}{.}\PY{n+nn}{text} \PY{k}{import} \PY{n}{CountVectorizer}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k}{def} \PY{n+nf}{print\PYZus{}top\PYZus{}words}\PY{p}{(}\PY{n}{nmf}\PY{p}{,}\PY{n}{feature\PYZus{}names}\PY{p}{,} \PY{n}{n\PYZus{}top\PYZus{}words}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{nr}\PY{p}{,} \PY{n}{topic} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{nmf}\PY{o}{.}\PY{n}{components\PYZus{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                \PY{n}{top\PYZus{}words\PYZus{}indx} \PY{o}{=} \PY{n}{topic}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{n}{n\PYZus{}top\PYZus{}words} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+                \PY{n}{ordd} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}top\PYZus{}words}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{ordd} \PY{o}{+}\PY{o}{=} \PY{n}{feature\PYZus{}names}\PY{p}{[}\PY{n}{top\PYZus{}words\PYZus{}indx}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{flokkur nr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nr}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ordd}\PY{p}{)}
+        
+        
+        \PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{genfromtxt}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trump\PYZus{}tweets.CSV}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{encoding}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{utf\PYZhy{}8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{dtype}\PY{o}{=}\PY{n+nb}{str}\PY{p}{,}\PY{n}{skip\PYZus{}header}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{10}
+        
+        \PY{n}{vectorizer} \PY{o}{=} \PY{n}{CountVectorizer}\PY{p}{(}\PY{n}{max\PYZus{}df}\PY{o}{=}\PY{l+m+mf}{0.95}\PY{p}{,}\PY{n}{min\PYZus{}df}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{stop\PYZus{}words}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{english}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{X} \PY{o}{=} \PY{n}{vectorizer}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{c+c1}{\PYZsh{}þessi gæji heldur utan um hve oft orðin koma fyrir}
+        
+        \PY{n}{nmf} \PY{o}{=} \PY{n}{NMF}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{n}{k}\PY{p}{,}\PY{n}{init}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{random}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{alpha}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{l1\PYZus{}ratio}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{5}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+        
+        
+        \PY{n}{feature\PYZus{}names} \PY{o}{=} \PY{n}{vectorizer}\PY{o}{.}\PY{n}{get\PYZus{}feature\PYZus{}names}\PY{p}{(}\PY{p}{)}
+        
+        
+        \PY{n}{print\PYZus{}top\PYZus{}words}\PY{p}{(}\PY{n}{nmf}\PY{p}{,} \PY{n}{feature\PYZus{}names}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+flokkur nr 1 : amp military repeal replace strong loves taxes women years borders vets going nation said work hard getting healthcare dems economy 
+flokkur nr 2 : people country american want way years enemy come like coming going millions time working million laws let history know bad 
+flokkur nr 3 : news fake media cnn just story don stories bad reporting new said dishonest enemy nbc good house like report time 
+flokkur nr 4 : border wall security democrats want country crime don southern immigration stop need military drugs republicans laws dems mexico national open 
+flokkur nr 5 : fbi collusion witch hunt hillary democrats russia clinton crooked campaign comey just russian mueller rigged election angry hoax dossier investigation 
+flokkur nr 6 : president trump obama donald thank election campaign just administration did xi said russia american foxandfriends right day years china isis 
+flokkur nr 7 : trade korea united china north states just deal good country years time tariffs countries dollars new year kim meeting long 
+flokkur nr 8 : great america make state job thank honor doing today new governor military day congratulations endorsement senator night country healthcare meeting 
+flokkur nr 9 : https thank today honor america american whitehouse welcome jobs join day national nation americans united families vote world minister melania 
+flokkur nr 10 : big tax vote crime win jobs cuts military strong endorsement vets borders republicans senate total amendment loves republican house governor 
+
+    \end{Verbatim}
+
+    \textbf{(b)} Ég vel flokkana sem mér sýnist tengjast \textbf{Border
+Wall}(flokkur nr. 4) og \textbf{Fake News}(flokkur nr. 3)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{W} \PY{o}{=} \PY{n}{nmf}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+        \PY{n}{bw\PYZus{}fn} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}
+        \PY{n}{n\PYZus{}tweets} \PY{o}{=} \PY{l+m+mi}{5}
+        \PY{k}{for} \PY{n}{ind} \PY{o+ow}{in} \PY{n}{bw\PYZus{}fn}\PY{p}{:}
+            \PY{n}{weight} \PY{o}{=} \PY{n}{W}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{ind}\PY{p}{]}
+            \PY{n}{top\PYZus{}tweets} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{weight}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{flokkur}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ind}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{*}\PY{l+m+mi}{50}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}tweets}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tweet}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{data}\PY{p}{[}\PY{n}{top\PYZus{}tweets}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+flokkur 3
+--------------------------------------------------
+tweet 1 : Google search results for “Trump News” shows only the viewing/reporting of Fake News Media. In other words they have it RIGGED for me \&amp; others so that almost all stories \&amp; news is BAD. Fake CNN is prominent. Republican/Conservative \&amp; Fair Media is shut out. Illegal? 96\% of{\ldots} 
+
+tweet 2 : CNN and others in the Fake News Business keep purposely and inaccurately reporting that I said the “Media is the Enemy of the People.” Wrong! I said that the “Fake News (Media) is the Enemy of the People” a very big difference. When you give out false information - not good! 
+
+tweet 3 : Google search results for “Trump News” shows only the viewing/reporting of Fake New Media. In other words they have it RIGGED for me \&amp; others so that almost all stories \&amp; news is BAD. Fake CNN is prominent. Republican/Conservative \&amp; Fair Media  is shut out. Illegal?  96\% of{\ldots} 
+
+tweet 4 : The Fake News refuses to talk about how Big and how Strong our BASE is. They show Fake Polls just like they report Fake News. Despite only negative reporting we are doing well - nobody is going to beat us. MAKE AMERICA GREAT AGAIN! 
+
+tweet 5 : Last time I went to Davos the Fake News said I should not go there. This year because of the Shutdown I decided not to go and the Fake News said I should be there. The fact is that the people understand the media better than the media understands them! 
+
+flokkur 4
+--------------------------------------------------
+tweet 1 : The most important way to stop gangs drugs human trafficking and massive crime is at our Southern Border. We need Border Security and as EVERYONE knows you can’t have Border Security without a Wall. The Drones \&amp; Technology are just bells and whistles. Safety for America! 
+
+tweet 2 : “Border Patrol Agents want the Wall.” Democrat’s say they don’t want the Wall (even though they know it is really needed) and they don’t want ICE. They don’t have much to campaign on do they? An Open Southern Border and the large scale crime that comes with such stupidity! 
+
+tweet 3 : Have the Democrats finally realized that we desperately need Border Security and a Wall on the Southern Border. Need to stop Drugs Human TraffickingGang Members \&amp; Criminals from coming into our Country. Do the Dems realize that most of the people not getting paid are Democrats? 
+
+tweet 4 : The Border has been a big mess and problem for many years. At some point Schumer and Pelosi who are weak on Crime and Border security will be forced to do a real deal so easy that solves this long time problem. Schumer used to want Border security - now he’ll take Crime! 
+
+tweet 5 : Statement by me last night in Florida: “Honestly I don’t think the Democrats want to make a deal. They talk about DACA but they don’t want to help..We are ready willing and able to make a deal but they don’t want to. They don’t want security at the border they don’t want{\ldots} 
+
+
+    \end{Verbatim}
+
+    2. {[}\emph{Image compresssion with PCA and NMF}, 30 points{]} Fit a
+non-negative matrix factorization model to the zero-digits in the subset
+of the MNIST database from the Jupyter workbook
+\texttt{v07\_pca\_tsne\_kmeans} (download from Piazza). Perform the
+following using 25 basis elements in the factorization:
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi})}
+\item
+  Display the \(W\) matrix as an image (see Fig. 14.33 in ESL) as well
+  as an image for the part of \(H\) that corresponds to the first image
+  in the data set.
+\item
+  Compare a reconstruction of the first image in the data set with the
+  original image. What compression ratio is achieved with 25 basis
+  elements?
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Repeat the analysis in a using 24-component (plus mean) PCA model (see
+  Fig. 14.33 in ESL). Compare briefly with the results in a)
+\end{enumerate}
+
+\emph{Comments}:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Use the NMF implementation in \texttt{sklearn.decomposition.NMF}. The
+  \emph{columns} of the input matrix should contain the pixel values for
+  each image (this is opposed to how we treated image data earlier). The
+  \texttt{fit\_transform} function returns the \(W\) matrix and the
+  attribute \texttt{components\_} contains the \(H\) matrix.
+\item
+  When reconstructing images you may need to "clip" the data, i.e. set
+  pixel values above 1.0 to 1.
+\item
+  Many elements of the \(W\) matrix will be zero and when you use a
+  gray-scale color map, these elements will show up as black. You might
+  therefore want to represent positive values with black and zeros with
+  white.
+\item
+  Use scikit to perform PCA.
+\end{enumerate}
+
+    \textbf{(a-i)}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}261}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{StandardScaler}
+          
+          \PY{c+c1}{\PYZsh{} Load MNIST dataset (small subset)}
+          \PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{loadtxt}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/mnist2500\PYZus{}X.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{labels} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{loadtxt}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/mnist2500\PYZus{}labels.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{X} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{labels}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}262}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{decomposition} \PY{k}{import} \PY{n}{NMF}
+          \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{25}
+          \PY{n}{nmf} \PY{o}{=} \PY{n}{NMF}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{n}{k}\PY{p}{,}\PY{n}{init}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{random}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{alpha}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{l1\PYZus{}ratio}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{5}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+          \PY{n}{W} \PY{o}{=} \PY{n}{nmf}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+          \PY{n}{H} \PY{o}{=} \PY{n}{nmf}\PY{o}{.}\PY{n}{components\PYZus{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}263}]:} \PY{c+c1}{\PYZsh{}Prentum út og teiknum W\PYZhy{}fylkið sem sýnir hvernig fyrsta myndin er uppröðuð}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{W}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{W}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,}\PY{n}{interpolation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray\PYZus{}r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{W\PYZhy{}fylki fyrstu tölunnar(5)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Prentum út H\PYZhy{}fylkið}
+          \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{row}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{fig}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{hspace}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{wspace}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}
+          \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}figheight}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+          \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}figwidth}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+          \PY{n}{fig}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{H\PYZhy{}fylki út frá NMF}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{14}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+m+mf}{0.93}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+              \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{ax}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{H}\PY{p}{[}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{5}\PY{o}{*}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{28}\PY{p}{,}\PY{l+m+mi}{28}\PY{p}{)}\PY{p}{,}
+                                  \PY{n}{interpolation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray\PYZus{}r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[1.58170883 0.2199161  0.07983504 0.58530211 0.35511231]
+ [0.         0.7145099  0.49439607 0.29901622 0.        ]
+ [0.         0.         0.2730148  0.12046098 0.39268645]
+ [0.27173823 0.16445356 0.         0.44348868 0.34076575]
+ [0.         0.         0.         0.33121117 0.38133959]]
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{(a-ii)}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}264}]:} \PY{c+c1}{\PYZsh{}Original image}
+          \PY{n}{mynd1} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+          \PY{n}{mynd1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{mynd1}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{28}\PY{p}{,}\PY{l+m+mi}{28}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{mynd1}\PY{o}{.}\PY{n}{T}\PY{p}{,}\PY{n}{interpolation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Original Image}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Reconstructed image}
+          \PY{n}{mynd2}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{784}\PY{p}{)}\PY{p}{)}       
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{784}\PY{p}{)}\PY{p}{:}
+              \PY{n}{mynd2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{minimum}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{W}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{n+nd}{@H}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+          \PY{n}{mynd2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{mynd2}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{28}\PY{p}{,}\PY{l+m+mi}{28}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{mynd2}\PY{o}{.}\PY{n}{T}\PY{p}{,}\PY{n}{interpolation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Reconstructed image}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}264}]:} Text(0.5,1,'Reconstructed image')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}265}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ bytes}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{nbytes}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ bytes}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{H}\PY{o}{.}\PY{n}{nbytes}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ bytes}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{W}\PY{o}{.}\PY{n}{nbytes}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{compr\PYZus{}ratio} \PY{o}{=} \PY{p}{(}\PY{n}{H}\PY{o}{.}\PY{n}{nbytes} \PY{o}{+} \PY{n}{W}\PY{o}{.}\PY{n}{nbytes}\PY{p}{)}\PY{o}{/}\PY{n}{X}\PY{o}{.}\PY{n}{nbytes}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Compression ratio:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{compr\PYZus{}ratio}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1467648 bytes
+156800 bytes
+46800 bytes
+Compression ratio: 0.13872536193964766
+
+    \end{Verbatim}
+
+    To store all these pictures in compressed format it only requires the
+\(H\) matrix and 2500 small \(5\times 5\) matrices stored within \(W\).
+This takes a lot less storage than storing 2500 \(28\times 28\) images.
+As we can see from the memory sizes of the arrays, the compression ratio
+\$\frac{M_{compressed}}{M_{original}} \approx 0.139 \$ where
+\(M_{compressed}\) is the memory required to store both \(W\) and \(H\)
+and \(M_{original}\) is the memory required to store all the 2500
+pictures
+
+    \textbf{(b-i)}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}266}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          
+          \PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{loadtxt}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/mnist2500\PYZus{}X.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{labels} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{loadtxt}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/mnist2500\PYZus{}labels.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{X} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{labels}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}267}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{decomposition} \PY{k}{import} \PY{n}{PCA}
+          
+          \PY{n}{pca} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{24}\PY{p}{)}
+          \PY{n}{pca}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+          \PY{n}{W\PYZus{}pc} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{column\PYZus{}stack}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{pca}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n}{H\PYZus{}pc} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{row\PYZus{}stack}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{n}{pca}\PY{o}{.}\PY{n}{components\PYZus{}}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{W\PYZus{}pc}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{H\PYZus{}pc}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(234, 25)
+(25, 784)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}268}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{W\PYZus{}pc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{W\PYZus{}pc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,}\PY{n}{interpolation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RdGy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{W\PYZhy{}fylki fyrstu tölunnar(5)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}Prentum út H\PYZhy{}fylkið}
+          \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{row}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{fig}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{hspace}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{wspace}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}
+          \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}figheight}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+          \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}figwidth}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+          \PY{n}{fig}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{H\PYZhy{}fylki út frá PCA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{14}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+m+mf}{0.93}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+              \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{ax}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{H\PYZus{}pc}\PY{p}{[}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{5}\PY{o}{*}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{28}\PY{p}{,}\PY{l+m+mi}{28}\PY{p}{)}\PY{p}{,}
+                                  \PY{n}{interpolation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RdGy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 0.7755102  -1.7680299  -1.27979795 -0.98246171 -1.49647917]
+ [-0.59737806  0.09484745 -0.15719339 -1.82405241 -1.1802857 ]
+ [-0.79241924 -0.98634711 -1.85188983  0.5830145  -0.47571597]
+ [-0.56207914 -0.97522711 -0.48814995 -0.54083897  0.34345879]
+ [ 1.1952202   0.2924943   1.31044486  0.16403318  0.16288193]]
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}271}]:} \PY{c+c1}{\PYZsh{}Original image}
+          \PY{n}{mynd1b} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+          \PY{n}{mynd1b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{mynd1b}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{28}\PY{p}{,}\PY{l+m+mi}{28}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{mynd1b}\PY{o}{.}\PY{n}{T}\PY{p}{,}\PY{n}{interpolation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Original Image}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Reconstructed image}
+          \PY{n}{mynd2b}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{784}\PY{p}{)}\PY{p}{)}       
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{784}\PY{p}{)}\PY{p}{:}
+              \PY{n}{mynd2b}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{minimum}\PY{p}{(}\PY{l+m+mf}{0.8}\PY{p}{,}\PY{n}{W\PYZus{}pc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{n+nd}{@H\PYZus{}pc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+          \PY{n}{mynd2b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{mynd2b}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{28}\PY{p}{,}\PY{l+m+mi}{28}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{mynd2b}\PY{o}{.}\PY{n}{T}\PY{p}{,}\PY{n}{interpolation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Reconstructed image}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}271}]:} Text(0.5,1,'Reconstructed image')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Við fáum í báðum tilvikum (\textbf{a} og \textbf{b}) góðar niðurstöður.
+Það er áhugavert að sjá hvernig \(H\) og \(W\) fylkin eru uppbyggð og
+hve mikið þau eru frábrugðin hver öðrum í lið \textbf{b} miðað við lið
+\textbf{a}. Út frá mynd af \(H\) í PCA má sjá að stökin í \(H\) eru ekki
+jafn látlaus og í NMF.
+
+    3. {[}\emph{Spectral clustering}, 30 points{]} In spectral clustering
+the clustering problem is transformed to a graph partitioning problem.
+The input data \(\mathbb{X}=\{x^{(1)},\ldots,x^{(n)} \}\) is used to
+construct a \emph{similarity graph} of pair-wise similarities between
+data points. The graph is then partitioned into disjoint sets of
+connected vertices which correspond to clusters in \(\mathbb{X}\). While
+many clustering algorithm such as \(k\)-means impose strict assumptions
+on the cluster shape, spectral clustering makes no such assumptions
+which makes it applicable in many situations. Spectral clustering is
+fairly computationally demanding which limits its use on large data
+sets.
+
+The following algorithm (NCUT) can be used to partition the data into
+two groups \(A\) and \(B\):
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Construct an \(n \times n\) similarity matrix \(W\) with
+  \(W_{ij}=e^{-\gamma|| x^{(i)},\ldots,x^{(j)} ||^2}\) for
+  \(i,j=1,\ldots,n\) (note that the matrix is symmetric). Note that
+  \(\gamma\) is a hyperparameter that you need to specify.
+\item
+  Compute the \emph{degree} of node
+  \(i,~d_i = \sum_{j=1}^n w_{ij},~j=1,\ldots,n\) and form the diagonal
+  matrix \(D\) with \(D_{ii}=d_i\) and \(D_{ij}=0\) for \(i \neq j\).
+\item
+  Compute the \emph{unnormalized graph Laplacian} \(L=D-W\).
+\item
+  Solve the \emph{generalized eigenvalue problem} \(Lu=\lambda Du\). The
+  \emph{second smallest} eigenvector (in terms of corresponding
+  eigenvalue) \(u_2\) gives a partition of the data into groups \(A\)
+  and \(B\) as follows. If element \(i\) of \(u_2\) is negative then
+  \(x^{(i)}\) belongs to group \(A\) and \(B\) otherwise.
+\end{enumerate}
+
+For \(k>2\) groups add the following extra step:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Form the \(n \times k\) matrix \(Z\) with the \(k\) eigenvectors
+  \(u_2,\ldots,u_{k+1}\). Apply \(k\)-means to this matrix and return
+  the resulting clustering (the rows of \(Z\) corresponds to derived
+  features).
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Implement steps 1 - 4 of the above algorithm and cluster the 2D data
+  in \texttt{hw8\_toy\_data.txt}. The data has two clusters so the
+  \(k\)-means step (5) is not needed. You should present i) a
+  scatterplot of the original data, ii) a graph of the elements of the
+  second-smallest eigenvector (in ascending order) and iii) a
+  scatterplot of the data with different colors indicating the two
+  clusters that you find. You need to experiment with to find a good
+  value of \(\gamma\) (look for a jump in the eigenvector plot).
+\item
+  Add the \(k\)-means step to your code from a). Apply the code to the
+  image data in \texttt{hw8\_fruit.jpg} after reducing it in size to
+  make the computations more managable (see comment 5 below). You should
+  present i) the reduced image, ii) an image illustrating the clustering
+  obtained with your algorithm, and iii) results of running \(k\)-means
+  directly on the (reduced) image.
+\end{enumerate}
+
+\emph{Comments}:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  To speed up computation of the similarity matrix, use you can use
+  \texttt{scipy.spatial.distance.cdist}.
+\item
+  We call a scalar \(\lambda\) and an \(n\)-vector \(u\) that satisfy
+  the equation \(Lu=\lambda Du\) an \emph{eigenvalue/eigenvector} pair.
+  There are \(n\) such pairs.
+\item
+  It is assumed that the eigenvalues are in ascending order and when
+  werefer to the \(j\)-th smallest eigenvector we refer to the
+  eigenvector that corresponds to the \(j\)-th smallest eigenvalue. It
+  can be shown that all eigenvalues of \(L\) are non-negative. Since
+  L1=(D-W)1=D1-W1=0 (1 denotes a vector of all 1's) we see that
+  \(u_1=1\) is an eigenvector corresponding to \(\lambda=0\) and is
+  therefore not relvant to the clustering. The second smallest (and
+  onwards) eigenvector however contains information about the clustering
+  (see section 14.5.3 in ESL for details).
+\item
+  You only need the \(k\) smallest eigenvalues and corresponding
+  eigenvectors. You can use \texttt{scipy.linalg.eigh} to obtain them
+  efficiently (using the \texttt{eig} function to find all the pairs
+  requires \(O(n^3)\) operations which quickly becomes prohibitive).
+\item
+  Use \texttt{skimage.data.load} to load the image file into a matrix,
+  \texttt{skimage.transform.resize} to reduce it in size by factor 4 and
+  \texttt{matplotlib.pyplot.imshow} to display the image.
+\item
+  A detailed review of spectral clustering is given in "A Tutorial on
+  Spectral Clustering" by Ulrike von Luxburg.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}382}]:} \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{spatial} \PY{k}{import} \PY{n}{distance}
+          \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{linalg} \PY{k}{import} \PY{n}{eigh}
+          
+          \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{loadtxt}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hw8\PYZus{}toy\PYZus{}data.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{n}\PY{p}{,}\PY{n}{p} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}
+          
+          \PY{n}{gamma}\PY{o}{=}\PY{l+m+mi}{5}
+          \PY{n}{W} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{gamma}\PY{o}{*}\PY{n}{distance}\PY{o}{.}\PY{n}{cdist}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{euclidean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{d} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+              \PY{n}{d}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{W}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+          \PY{n}{D} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{eye}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{o}{*}\PY{n}{d}
+          \PY{n}{L}\PY{o}{=}\PY{n}{D}\PY{o}{\PYZhy{}}\PY{n}{W}
+          \PY{n}{lam}\PY{p}{,} \PY{n}{u} \PY{o}{=} \PY{n}{eigh}\PY{p}{(}\PY{n}{L}\PY{p}{,} \PY{n}{D}\PY{p}{,} \PY{n}{eigvals\PYZus{}only}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}\PY{n}{eigvals}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+          \PY{n}{sec\PYZus{}small} \PY{o}{=} \PY{n}{u}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+          \PY{c+c1}{\PYZsh{}print(sec\PYZus{}small)}
+          \PY{c+c1}{\PYZsh{}print(np.argsort(lam)[1])}
+          \PY{c+c1}{\PYZsh{}print(u)}
+          \PY{c+c1}{\PYZsh{}print(lam)}
+          \PY{c+c1}{\PYZsh{}print(lam)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}383}]:} \PY{c+c1}{\PYZsh{}original data}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Original data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}eigvector}
+          \PY{n}{X1} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{sec\PYZus{}small}\PY{o}{\PYZlt{}}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}
+          \PY{n}{X2} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{sec\PYZus{}small}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X1}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{X1}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X2}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{X2}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}383}]:} <matplotlib.collections.PathCollection at 0x1b6869e44e0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}468}]:} \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{data}
+          \PY{k+kn}{from} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{image} \PY{k}{import} \PY{n}{imread}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cluster} \PY{k}{import} \PY{n}{KMeans}
+          
+          \PY{k}{def} \PY{n+nf}{ncut}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{k}\PY{p}{,}\PY{n}{gamma}\PY{p}{)}\PY{p}{:}
+              \PY{n}{n}\PY{p}{,}\PY{n}{p} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}
+              \PY{n}{gamma}\PY{o}{=}\PY{l+m+mi}{1}
+              \PY{n}{W} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{gamma}\PY{o}{*}\PY{n}{distance}\PY{o}{.}\PY{n}{cdist}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{euclidean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+              \PY{n}{d} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{d}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{W}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+              \PY{n}{D} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{eye}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{o}{*}\PY{n}{d}
+              \PY{n}{L}\PY{o}{=}\PY{n}{D}\PY{o}{\PYZhy{}}\PY{n}{W}
+              \PY{n}{lam}\PY{p}{,} \PY{n}{u} \PY{o}{=} \PY{n}{eigh}\PY{p}{(}\PY{n}{L}\PY{p}{,} \PY{n}{D}\PY{p}{,} \PY{n}{eigvals\PYZus{}only}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}\PY{n}{eigvals}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{k}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+              \PY{k}{return}\PY{p}{(}\PY{n}{lam}\PY{p}{,}\PY{n}{u}\PY{p}{)}
+          
+          \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{3}
+          \PY{n}{gamma}\PY{o}{=}\PY{l+m+mf}{0.2}
+          \PY{n}{A} \PY{o}{=} \PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fruit.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{n}\PY{p}{,}\PY{n}{p}\PY{p}{,}\PY{n}{tmp} \PY{o}{=} \PY{n}{A}\PY{o}{.}\PY{n}{shape} \PY{c+c1}{\PYZsh{}Upphafleg stærð myndar}
+          \PY{n}{A} \PY{o}{=} \PY{n}{skimage}\PY{o}{.}\PY{n}{transform}\PY{o}{.}\PY{n}{resize}\PY{p}{(}\PY{n}{A}\PY{p}{,}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{n}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n+nb}{int}\PY{p}{(}\PY{n}{p}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{c+c1}{\PYZsh{}minnkum myndina}
+          \PY{n}{n}\PY{p}{,}\PY{n}{p}\PY{p}{,}\PY{n}{tmp}\PY{o}{=}\PY{n}{A}\PY{o}{.}\PY{n}{shape}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{A}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+          
+          
+          
+          \PY{n}{A\PYZus{}rgb} \PY{o}{=} \PY{n}{A}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{A}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{n}{A}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{c+c1}{\PYZsh{}rgb transform}
+          \PY{n}{lam}\PY{p}{,} \PY{n}{u} \PY{o}{=} \PY{n}{ncut}\PY{p}{(}\PY{n}{A\PYZus{}rgb}\PY{p}{,}\PY{n}{k}\PY{p}{,}\PY{n}{gamma}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}K\PYZhy{}means flokkun}
+          \PY{n}{A\PYZus{}km} \PY{o}{=} \PY{n}{KMeans}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{n}{k}\PY{p}{)}
+          \PY{n}{A\PYZus{}km}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{u}\PY{p}{)}
+          
+          \PY{n}{clusters} \PY{o}{=} \PY{n}{A\PYZus{}km}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}} \PY{c+c1}{\PYZsh{}Litir í rgb}
+          \PY{n}{labels} \PY{o}{=} \PY{n}{A\PYZus{}km}\PY{o}{.}\PY{n}{labels\PYZus{}}  \PY{c+c1}{\PYZsh{}vigur}
+          \PY{n}{labels} \PY{o}{=} \PY{n}{labels}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{n}{p}\PY{p}{)}\PY{p}{;} \PY{c+c1}{\PYZsh{}n X p fylki með labels}
+          
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{labels}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}snati\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}skimage\textbackslash{}transform\textbackslash{}\_warps.py:84: UserWarning: The default mode, 'constant', will be changed to 'reflect' in skimage 0.15.
+  warn("The default mode, 'constant', will be changed to 'reflect' in "
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}468}]:} <matplotlib.image.AxesImage at 0x1b6804787f0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Ég ákvað út frá upphaflegu myndinni að hafa \(k=3\) sem sagt flokkarnir
+appelsína, epli og bakgrunnur. Með góðu gildi á \(\gamma\) fæst síðan
+ágætis skipting á myndinni. Það má líklega fínstilla \(\gamma\) svo
+toppurinn á eplinu flokkist ekki í bakgrunninn.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
